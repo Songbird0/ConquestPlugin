@@ -19,6 +19,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.Scoreboard;
+import org.json.simple.JSONObject;
 import org.yaml.snakeyaml.Yaml;
 
 import fr.songbird.commbdd.MySQLWrapper;
@@ -46,6 +47,8 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	 */
 	private StatNation stn;
 	
+	private ArrayList<JSONObject> playerProfiles;
+	
 	/**
 	 * Parser du fichier de configuration.
 	 */
@@ -68,6 +71,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	{
 		server = Bukkit.getServer();
 		stn = new StatNation();
+		playerProfiles = new ArrayList<JSONObject>();
 	}
 
 	
@@ -206,6 +210,11 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	public void whenPlayerJoin(PlayerJoinEvent pje)
 	{
 		pje.getPlayer().setScoreboard(stn.getCurrentScoreboard());
+	}
+	
+	public final ArrayList<JSONObject> getPlayerProfilesList()
+	{
+		return this.playerProfiles;
 	}
 	
 	public static void main(String[] args) 

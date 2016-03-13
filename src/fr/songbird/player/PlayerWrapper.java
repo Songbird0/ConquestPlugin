@@ -3,13 +3,17 @@ package fr.songbird.player;
 import static fr.songbird.manager.ConquestPlugin.LOGGER;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.FilenameFilter;
 import java.io.IOException;
+import java.util.ArrayList;
 
-import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import fr.songbird.manager.ConquestPlugin;
 import fr.songbird.nation.Nation;
@@ -121,6 +125,34 @@ public class PlayerWrapper
 			}
 		}
 		return false;
+	}
+	
+	public static void setPlayerProfile(Player player, ArrayList<JSONObject> playerProfiles)
+	{
+		JSONParser parser = new JSONParser();
+		
+		try
+		{
+			StringBuffer buffer = new StringBuffer();
+			buffer.append(bddPath);
+			buffer.append(File.separator);
+			buffer.append(player.getName());
+			buffer.append(".json");
+			
+			JSONObject jO = (JSONObject)parser.parse(new FileReader(buffer.toString()));
+			
+			playerProfiles.add(jO);
+		}catch(FileNotFoundException fnf0)
+		{
+			LOGGER.error(fnf0.getMessage());
+		}catch(IOException ioe0)
+		{
+			LOGGER.error(ioe0.getMessage());
+		}
+		catch(ParseException pe0)
+		{
+			LOGGER.error(pe0.getMessage());
+		}
 	}
 	
 	public static void main(String...strings)
