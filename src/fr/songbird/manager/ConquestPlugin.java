@@ -177,7 +177,8 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 		
 		
 		stn.setCurrentScoreboard(score);
-		
+
+		stn.initializeScoreboard();
 		
 	}
 	
@@ -205,7 +206,6 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	public void whenPlayerJoin(PlayerJoinEvent pje)
 	{
 		pje.getPlayer().setScoreboard(stn.getCurrentScoreboard());
-		stn.initializeScoreboard();
 	}
 	
 	public static void main(String[] args) 
