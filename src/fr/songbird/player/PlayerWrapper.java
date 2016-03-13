@@ -77,6 +77,7 @@ public class PlayerWrapper
 		}catch(IOException ioe0)
 		{
 			LOGGER.error(ioe0.getMessage());
+			LOGGER.error("Une erreur est survenue lors de la tentative de sauvegarde lancée par le plugin.");
 		}finally
 		{
 			try
@@ -157,8 +158,7 @@ public class PlayerWrapper
 	
 	public static void main(String...strings)
 	{
-		System.out.println("Spyglass_: "+PlayerWrapper.heExists("Spyglass_"));
-		System.out.println("José: "+PlayerWrapper.heExists("José"));
+		
 	}
 
 }
