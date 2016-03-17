@@ -198,8 +198,6 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void whenPlayerMove(PlayerMoveEvent pme)
 	{
-		try
-		{
 			new Thread(new Runnable()
 			{
 
@@ -218,11 +216,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 					buffer.append(pme.getTo());
 					LOGGER.info(buffer.toString());
 					
-				}});
-		}catch(Exception ie0)
-		{
-			LOGGER.error(ie0.getMessage());
-		}
+				}}).start();
 	}
 	
 	@EventHandler(priority = EventPriority.HIGH)
