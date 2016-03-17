@@ -78,6 +78,7 @@ public class PlayerWrapper
 		{
 			LOGGER.error(ioe0.getMessage());
 			LOGGER.error("Une erreur est survenue lors de la tentative de sauvegarde lancée par le plugin.");
+			Runtime.getRuntime().exit(0x1);
 		}finally
 		{
 			try
@@ -154,11 +155,6 @@ public class PlayerWrapper
 		{
 			LOGGER.error(pe0.getMessage());
 		}
-	}
-	
-	public static void main(String...strings)
-	{
-		
 	}
 
 }

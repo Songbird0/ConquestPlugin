@@ -17,10 +17,13 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scoreboard.Scoreboard;
 import org.json.simple.JSONObject;
 import org.yaml.snakeyaml.Yaml;
+
+import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 import fr.songbird.commbdd.MySQLWrapper;
 import fr.songbird.constants.ProgramConstants;
@@ -72,6 +75,12 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 		server = Bukkit.getServer();
 		stn = new StatNation();
 		playerProfiles = new ArrayList<JSONObject>();
+		Plugin plugin = getServer().getPluginManager().getPlugin("WorldGuard");
+		
+		if(plugin == null || !(plugin instanceof WorldGuardPlugin))
+		{
+			LOGGER.error("Le serveur n'a pas réussi à charger le plugin worldguard ou n'existe pas.");
+		}
 	}
 
 	
@@ -197,7 +206,17 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 				@Override
 				public void run() 
 				{
-					
+					StringBuffer buffer = new StringBuffer();
+					buffer.append("Nom du thead: ");
+					buffer.append(Thread.currentThread().getName());
+					buffer.append("=================================\n\n\n");
+					buffer.append("Le joueur ");
+					buffer.append(pme.getPlayer());
+					buffer.append(" s'est déplacé de ");
+					buffer.append(pme.getFrom());
+					buffer.append(" à ");
+					buffer.append(pme.getTo());
+					LOGGER.info(buffer.toString());
 					
 				}});
 		}catch(Exception ie0)
