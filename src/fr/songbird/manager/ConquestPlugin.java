@@ -126,14 +126,16 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	}
 	
 	
-	public static final MySQLWrapper parsingYamlFile()
+	public static final MySQLWrapper parsingYamlFile() throws FileNotFoundException
 	{
+		File yamlFile = null;
 		try 
 		{
 			StringBuilder builder = new StringBuilder();
 			builder.append("ConquestPlugin_lib");
 			builder.append(File.separator);
 			builder.append("config.yml");
+			yamlFile = new File(builder.toString());
 			new File(builder.toString()).createNewFile();
 			InputStream in = new FileInputStream(new File(builder.toString()).getAbsolutePath());
 
@@ -207,7 +209,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 					StringBuffer buffer = new StringBuffer();
 					buffer.append("Nom du thead: ");
 					buffer.append(Thread.currentThread().getName());
-					buffer.append("=================================\n\n\n");
+					buffer.append("\n\n\n=================================\n\n\n");
 					buffer.append("Le joueur ");
 					buffer.append(pme.getPlayer());
 					buffer.append(" s'est déplacé de ");
@@ -216,7 +218,8 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 					buffer.append(pme.getTo());
 					LOGGER.info(buffer.toString());
 					
-				}}).start();
+				}
+			}).start();
 	}
 	
 	@EventHandler(priority = EventPriority.HIGH)
