@@ -12,8 +12,10 @@ import static fr.songbird.manager.ConquestPlugin.LOGGER;
 
 class YamlFileSkeleton 
 {
+	def skeletonName
+	def yamlFilePath
 	
-	public YamlFileSkeleton(String skeletonName, File yamlFilePath)
+	YamlFileSkeleton(String skeletonName, File yamlFilePath)
 	{
 		this.skeletonName = skeletonName;
 		this.yamlFilePath = yamlFilePath;
@@ -69,21 +71,27 @@ class YamlFileSkeleton
 			def yString = yaml.dump(genericYamlSkeleton);
 			try 
 			{
+				yamlFilePath.createNewFile();
 				writer = new FileWriter(yamlFilePath);
 				writer.write(yString);
 			}
 			catch(FileNotFoundException fnf1) 
 			{
-				LOGGER.error(fnf1.getMessage());	
+				LOGGER.error(fnf1.getMessage());
+				Runtime.getRuntime().exit(0x1);
 			}
 			catch(IOException ioe1)
 			{
 				LOGGER.error(ioe1.getMessage());
+				Runtime.getRuntime.exit(0x1);
 			}
 			finally
 			{
-				writer.flush();
-				writer.close();
+				if(!null.equals(writer))
+				{
+					writer.flush();
+					writer.close();
+				}
 			}
 			
 		}
