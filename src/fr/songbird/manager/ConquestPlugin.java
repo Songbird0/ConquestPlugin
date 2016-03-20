@@ -136,8 +136,8 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 			builder.append(File.separator);
 			builder.append("config.yml");
 			yamlFile = new File(builder.toString());
-			new File(builder.toString()).createNewFile();
-			InputStream in = new FileInputStream(new File(builder.toString()).getAbsolutePath());
+			yamlFile.createNewFile();
+			InputStream in = new FileInputStream(yamlFile.getAbsolutePath());
 
 
 			@SuppressWarnings("unchecked")
