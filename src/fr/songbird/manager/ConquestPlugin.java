@@ -126,7 +126,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	}
 	
 	
-	public static final MySQLWrapper parsingYamlFile() throws FileNotFoundException
+	public static final MySQLWrapper parsingYamlFile()
 	{
 		File yamlFile = null;
 		try 
