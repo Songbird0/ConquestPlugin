@@ -15,7 +15,24 @@ class YamlFileSkeleton
 	def skeletonName
 	def yamlFilePath
 	
-	YamlFileSkeleton(String skeletonName, File yamlFilePath)
+	/**
+	 * Constructeur dédié au chargement d'un fichier yaml, et non à l'écriture.
+	 * @param yamlFilePath  Chemin du fichier à charger en mémoire
+	 * @see {@link YamlFileSkeleton#YamlFileSkeleton(File, String)}
+	 */
+	YamlFileSkeleton(File yamlFilePath)
+	{
+		this.yamlFilePath = yamlFilePath;
+	}
+	
+	/**
+	 * Constructeur dédié à l'écriture d'un fichier yaml.
+	 * @param yamlFilePath Chemin du fichier à écrire
+	 * @param skeletonName Nom de la structure de base du fichier à écrire ("sql" pour générer un fichier de configuration dédié à la connexion à une bdd; "generic" si vous voulez personnaliser votre fichier de configuration facilement)
+	 * @see {@link YamlFileSkeleton#mySqlYamlFileArchetype()}
+	 * @see {@link YamlFileSkeleton#genericYamlFileArchetype(Map)}
+	 */
+	YamlFileSkeleton(File yamlFilePath, String skeletonName)
 	{
 		this.skeletonName = skeletonName;
 		this.yamlFilePath = yamlFilePath;
@@ -95,6 +112,19 @@ class YamlFileSkeleton
 			}
 			
 		}
+		else
+		{
+			if(genericYamlSkeleton in java.util.List)
+			{
+				
+			}
+		}
+	}
+	
+	
+	public void loadYamlFile(File yamlFile)
+	{
+		
 	}
 	
 }
