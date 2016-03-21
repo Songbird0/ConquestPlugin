@@ -6,6 +6,7 @@ import org.yaml.snakeyaml.Yaml;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileWriter;
+import java.io.InputStream;
 
 
 import static fr.songbird.manager.ConquestPlugin.LOGGER;
@@ -81,7 +82,7 @@ class YamlFileSkeleton
 	*/
 	public void genericYamlFileArchetype(genericYamlSkeleton)
 	{
-		if(genericYamlSkeleton in java.util.Map)
+		if(genericYamlSkeleton in [java.util.Map, java.util.List])
 		{
 			FileWriter writer = null;
 			def yaml = new Yaml();
@@ -112,19 +113,17 @@ class YamlFileSkeleton
 			}
 			
 		}
-		else
-		{
-			if(genericYamlSkeleton in java.util.List)
-			{
-				
-			}
-		}
 	}
 	
 	
-	public void loadYamlFile(File yamlFile)
+	public Object loadYamlFile(File yamlFile)
 	{
+		InputStream inputStream = new FileInputStream(yamlFile);
 		
+		def yaml = new Yaml();
+		def object = yaml.load(inputStream);
+		
+		return object;
 	}
 	
 }
