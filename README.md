@@ -1,2 +1,2 @@
 # ConquestPlugin
-Conquest system of Dynastium
+Conquest system for Minecraft server
