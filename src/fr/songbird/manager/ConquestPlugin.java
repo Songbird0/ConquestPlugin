@@ -45,6 +45,11 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	
 	private MySQLWrapper msw;
 	private final Server server;
+	/**
+	* Référence vers une instance du coeur du plugin.
+	*
+	*/
+	private final ConquestPluginCore core;
 
 	/**
 	 * Scoreboard rattaché aux plugins conquete.
