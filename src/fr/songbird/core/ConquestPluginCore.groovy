@@ -20,11 +20,13 @@ class ConquestPluginCore
 	*/
 	def x, y, z; 
 
-	ConquestPluginCore(int x, int y, int z)
+	/*
+	* Constructeur par défaut - destiné à recevoir les coordonnées du joueur cible dans un temps différent de celui de son appel.
+	*/
+	ConquestPluginCore()
 	{
 
 	}
-
 
 
 	public def addReachedZoneListener(ReachedZoneListener rzl)
