@@ -39,7 +39,7 @@ import net.wytrem.logging.LoggerFactory;
  * @author songbird
  * @version 0.0.4_0-ALPHA
  */
-public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConstants
+public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConstants, ReachedZoneListener
 {
 	
 	
@@ -81,6 +81,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 		{
 			LOGGER.error("Le serveur n'a pas réussi à charger le plugin worldguard ou n'existe pas.");
 		}
+		
 	}
 
 	
