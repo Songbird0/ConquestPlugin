@@ -27,6 +27,8 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 
 import fr.songbird.commbdd.MySQLWrapper;
 import fr.songbird.constants.ProgramConstants;
+import fr.songbird.core.ConquestPluginCore;
+import fr.songbird.core.ReachedZoneListener;
 import fr.songbird.exceptions.DataIntegrityException;
 import fr.songbird.nation.Nation;
 import fr.songbird.scoreboard.StatNation;
@@ -197,6 +199,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	public void onEnable()
 	{
 		server.getPluginManager().registerEvents(this, this);
+		core.addReachedZoneListener(this);
 		final Scoreboard score = Bukkit.getScoreboardManager().getNewScoreboard();
 		this.getCommand(COMMANDCORE).setExecutor(new NationCommand());
 		
@@ -224,7 +227,10 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 				public void run() 
 				{
 					
-
+					Location location = pme.getPlayer().getLocation();
+					core.setX(location.getX());
+					core.setY(location.getY());
+					core.setZ(location.getZ());
 					
 				}
 			}).start();
