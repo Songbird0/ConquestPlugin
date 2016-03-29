@@ -51,7 +51,10 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	 */
 	private StatNation stn;
 	
-	private ArrayList<JSONObject> playerProfiles;
+	/**
+	* Profils des joueurs.
+	*/
+	private ArrayList<JSONObject> playerProfiles; //TODO Remplacer l'ArrayList par une LinkedList ou équivalent - trop coûteux en ressources
 	
 	/**
 	 * Parser du fichier de configuration.
@@ -209,6 +212,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 				public void run() 
 				{
 					
+
 					
 				}
 			}).start();
