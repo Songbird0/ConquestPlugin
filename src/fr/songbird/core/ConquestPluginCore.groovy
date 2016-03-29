@@ -15,7 +15,10 @@ class ConquestPluginCore
 	private static final BasicLogger LOGGER = LoggerFactory.getLogger(ConquestPluginCore.class);
 
 	def ell = new EventListenerList();
-	def x, y, z; //Coordonnées de la zone WorldGuard
+	/*
+	* Coordonnées de la zone WorldGuard
+	*/
+	def x, y, z; 
 
 	ConquestPluginCore(int x, int y, int z)
 	{
