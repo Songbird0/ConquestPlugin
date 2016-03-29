@@ -17,7 +17,7 @@ class ConquestPluginCore
 	def ell = new EventListenerList();
 	def x, y, z; //Coordonnées de la zone WorldGuard
 
-	ConquestPluginCore()
+	ConquestPluginCore(int x, int y, int z)
 	{
 
 	}
