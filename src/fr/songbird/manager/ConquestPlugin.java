@@ -45,6 +45,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	
 	private MySQLWrapper msw;
 	private final Server server;
+
 	/**
 	 * Scoreboard rattaché aux plugins conquete.
 	 */
@@ -207,17 +208,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 				@Override
 				public void run() 
 				{
-					StringBuffer buffer = new StringBuffer();
-					buffer.append("Nom du thead: ");
-					buffer.append(Thread.currentThread().getName());
-					buffer.append("\n\n\n=================================\n\n\n");
-					buffer.append("Le joueur ");
-					buffer.append(pme.getPlayer());
-					buffer.append(" s'est déplacé de ");
-					buffer.append(pme.getFrom());
-					buffer.append(" à ");
-					buffer.append(pme.getTo());
-					LOGGER.info(buffer.toString());
+					
 					
 				}
 			}).start();
@@ -228,6 +219,12 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	{
 		pje.getPlayer().setScoreboard(stn.getCurrentScoreboard());
 	}
+
+	@Override
+	public void whenZoneHasBeenReached()
+	{
+
+	}
 	
 	public final ArrayList<JSONObject> getPlayerProfilesList()
 	{
@@ -236,6 +233,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	
 	public static void main(String[] args) 
 	{
+
 	}
 
 }
