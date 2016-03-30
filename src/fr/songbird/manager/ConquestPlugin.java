@@ -146,6 +146,12 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	}
 	
 	
+	/**
+	* Méthode encore utilisée, mais peu recommandée.
+	* Le générateur de fichiers de configuration écrit en groovy est bien plus propre.
+	*
+	*/
+	@Deprecated
 	public static final MySQLWrapper parsingYamlFile()
 	{
 		File yamlFile = null;
