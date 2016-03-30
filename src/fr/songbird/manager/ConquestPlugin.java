@@ -98,7 +98,6 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 		if(plugin == null || !(plugin instanceof WorldGuardPlugin))
 		{
 			LOGGER.error("Le serveur n'a pas réussi à charger le plugin worldguard ou n'existe pas.");
-			Runtime.getRuntime().exit(0x1);
 		}
 		
 	}
