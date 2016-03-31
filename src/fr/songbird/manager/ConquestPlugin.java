@@ -236,21 +236,18 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	public void whenPlayerMove(PlayerMoveEvent pme)
 	{
 
-			new Thread(new Runnable()
+			pool.execute(new Runnable()
 			{
-
 				@Override
-				public void run() 
+				public void run()
 				{
-					
 					final Location location = pme.getPlayer().getLocation();
 					core.setX(location.getX());
 					core.setY(location.getY());
 					core.setZ(location.getZ());
 					core.setUserLocation(location);
-					
 				}
-			}).start();
+			});
 	}
 	
 	@EventHandler(priority = EventPriority.HIGH)
