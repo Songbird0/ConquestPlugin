@@ -28,12 +28,6 @@ class ConquestPluginCore
 
 	}
 
-
-	public def addReachedZoneListener(ReachedZoneListener rzl)
-	{
-		ell.add(ReachedZoneListener.class, rzl);
-	}
-	
 	private def getRZL()
 	{
 		return ell.getListeners(ReachedZoneListener.class);
@@ -45,6 +39,24 @@ class ConquestPluginCore
 		{
 			rzl.whenZoneHasBeenReached();
 		}
+	}
+
+
+
+
+	public def addReachedZoneListener(ReachedZoneListener rzl)
+	{
+		ell.add(ReachedZoneListener.class, rzl);
+	}
+
+
+	/*
+	* Va vérifier à chaque appel si le joueur se trouve dans les limites d'une zone.
+	*
+	*/
+	public def run()
+	{
+
 	}
 
 
