@@ -233,7 +233,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 				public void run() 
 				{
 					
-					Location location = pme.getPlayer().getLocation();
+					final Location location = pme.getPlayer().getLocation();
 					core.setX(location.getX());
 					core.setY(location.getY());
 					core.setZ(location.getZ());

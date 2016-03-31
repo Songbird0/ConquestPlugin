@@ -14,18 +14,18 @@ class ConquestPluginCore
 
 	private static final BasicLogger LOGGER = LoggerFactory.getLogger(ConquestPluginCore.class);
 
-	def ell = new EventListenerList();
+	final def ell = new EventListenerList();
 	/*
 	* Coordonnées de la zone WorldGuard
 	*/
-	def x, y, z;
+	synchronized def x, y, z;
 
 	/*
 	* Informations relatives à la position du joueur
 	*/
-	def userLocation; 
+	synchronized def userLocation; 
 
-	def RegionsSet = WGBukkit.getRegionManager(Bukkit.getServer().getWorld("Dynastium")).getApplicableRegions(userLocation);
+	synchronized def RegionsSet;
 
 	/*
 	* Constructeur par défaut - destiné à recevoir les coordonnées du joueur cible dans un temps différent de celui de son appel.
@@ -40,7 +40,7 @@ class ConquestPluginCore
 		return ell.getListeners(ReachedZoneListener.class);
 	}
 
-	private def fireWhenZoneHasBeenReached()
+	private synchronized def fireWhenZoneHasBeenReached()
 	{
 		for(ReachedZoneListener rzl : getRZL())
 		{
@@ -61,10 +61,10 @@ class ConquestPluginCore
 	* Va vérifier à chaque appel si le joueur se trouve dans les limites d'une zone.
 	*
 	*/
-	public def run()
+	public synchronized def run()
 	{
 
-
+		
 
 	}
 
