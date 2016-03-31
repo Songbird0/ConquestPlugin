@@ -50,7 +50,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	
 	private MySQLWrapper msw;
 	private final Server server;
-	private final ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+	private final ExecutorService pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
 	
 	/**
@@ -224,6 +224,12 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 
 		stn.initializeScoreboard();
 		
+	}
+
+	@Override
+	public void onDisable()
+	{
+		pool.shutdown();
 	}
 	
 	@EventHandler(priority = EventPriority.HIGHEST)
