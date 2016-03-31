@@ -36,6 +36,8 @@ import fr.songbird.scoreboard.StatNation;
 import net.wytrem.logging.BasicLogger;
 import net.wytrem.logging.LoggerFactory;
 
+import java.util.concurrent.*;
+
 
 /**
  * Classe principale chargée de faire le pont entre les différents composants du plugin (tels que le scoreboard), et de veiller aux changements d'états des régions représentant les villages sur la carte.
@@ -48,6 +50,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	
 	private MySQLWrapper msw;
 	private final Server server;
+	private final ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
 	
 	/**
@@ -226,6 +229,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void whenPlayerMove(PlayerMoveEvent pme)
 	{
+
 			new Thread(new Runnable()
 			{
 
