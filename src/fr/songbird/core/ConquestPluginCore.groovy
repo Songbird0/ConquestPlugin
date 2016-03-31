@@ -18,7 +18,14 @@ class ConquestPluginCore
 	/*
 	* Coordonnées de la zone WorldGuard
 	*/
-	def x, y, z; 
+	def x, y, z;
+
+	/*
+	* Informations relatives à la position du joueur
+	*/
+	def userLocation; 
+
+	def RegionsSet = WGBukkit.getRegionManager(Bukkit.getServer().getWorld("Dynastium")).getApplicableRegions(userLocation);
 
 	/*
 	* Constructeur par défaut - destiné à recevoir les coordonnées du joueur cible dans un temps différent de celui de son appel.
@@ -56,6 +63,8 @@ class ConquestPluginCore
 	*/
 	public def run()
 	{
+
+
 
 	}
 

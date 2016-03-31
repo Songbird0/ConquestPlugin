@@ -237,6 +237,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 					core.setX(location.getX());
 					core.setY(location.getY());
 					core.setZ(location.getZ());
+					core.setUserLocation(location);
 					
 				}
 			}).start();
