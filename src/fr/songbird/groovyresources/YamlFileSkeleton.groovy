@@ -1,19 +1,13 @@
 package fr.songbird.groovyresources;
 
-import org.yaml.snakeyaml.Yaml;
+import static fr.songbird.manager.ConquestPlugin.LOGGER
 
+import org.yaml.snakeyaml.Yaml
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.FileWriter;
-import java.io.InputStream;
-
-
-import static fr.songbird.manager.ConquestPlugin.LOGGER;
+import fr.songbird.exceptions.DataIntegrityException
 
 class YamlFileSkeleton 
 {
-	def skeletonName
 	def yamlFilePath
 	
 	/**
@@ -32,12 +26,41 @@ class YamlFileSkeleton
 	 * @param skeletonName Nom de la structure de base du fichier à écrire ("sql" pour générer un fichier de configuration dédié à la connexion à une bdd; "generic" si vous voulez personnaliser votre fichier de configuration facilement)
 	 * @see {@link YamlFileSkeleton#mySqlYamlFileArchetype()}
 	 * @see {@link YamlFileSkeleton#genericYamlFileArchetype(Map)}
+	 * @see {@link YamlFileSkeleton#YamlFileSkeleton(File, String, Map)}
+	 * @throws DataIntegrityException
 	 */
-	YamlFileSkeleton(File yamlFilePath, String skeletonName)
+	YamlFileSkeleton(File yamlFilePath, String skeletonName) throws DataIntegrityException
 	{
-		this.skeletonName = skeletonName;
 		this.yamlFilePath = yamlFilePath;
+		
+
+		switch(skeletonName)
+		{
+			case "mysql.skeleton" : mySqlYamlFileArchetype(); break;
+			default:
+				StringBuilder builder = new StringBuilder();
+				builder.append("Le mot-clé que vous avez renseigné (").append(skeletonName).append(") est inconnu, ou n'a pas été utilisé avec le constructeur adéquat.\nVeuillez vous référer à la javadoc.")
+				throw new DataIntegrityException(builder.toString());
+		}
 	}
+
+	/**
+	*
+	* Constructeur dédié à l'écriture d'un fichier yaml non pris en charge par la classe. (archétype inconnu)
+	* @param yamlFilePath Chemin du fichier à écrire
+	* @param skeletonName Nom de la structure de base du fichier à écrire (Si la structure n'est pas reconnu, le nom doit forcément être "generic.skeleton")
+	* @param yamlFileContent Contenu du fichier si le mot-clé est "generic.skeleton" (peut contenir actuellement tous les objets fils de la classe Map et List)
+	* @see {@link YamlFileSkeleton#YamlFileSkeleton(File)}
+	* @see {@link YamlFileSkeleton#YamlFileSkeleton(File, String)}
+	* @see {@link YamlFileSkeleton#genericYamlFileArchetype(Map)}
+	*/ 
+	YamlFileSkeleton(File yamlFilePath, String skeletonName, def yamlFileContent)
+	{
+		this.yamlFilePath = yamlFilePath
+		genericYamlFileArchetype(yamlFileContent)
+	}
+
+
 	
 	
 	public void mySqlYamlFileArchetype()
@@ -80,7 +103,7 @@ class YamlFileSkeleton
 	/**
 	* Generation d'un fichier yaml basé sur la map passée en paramètre par l'utilisateur: genericYamlFileArchetype(def maMap = [:])
 	*/
-	public void genericYamlFileArchetype(genericYamlSkeleton)
+	public void genericYamlFileArchetype(genericYamlSkeleton) throws DataIntegrityException
 	{
 		if(genericYamlSkeleton in [java.util.Map, java.util.List])
 		{
@@ -112,6 +135,10 @@ class YamlFileSkeleton
 				}
 			}
 			
+		}
+		else
+		{
+			throw new DataIntegrityException("Le fichier yaml ne contient ni une liste, ni de tableau associatif.")
 		}
 	}
 	
