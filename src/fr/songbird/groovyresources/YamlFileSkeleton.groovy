@@ -6,6 +6,7 @@ import org.yaml.snakeyaml.Yaml
 
 import fr.songbird.exceptions.DataIntegrityException
 
+
 class YamlFileSkeleton 
 {
 	def yamlFilePath
@@ -63,7 +64,7 @@ class YamlFileSkeleton
 
 	
 	
-	public void mySqlYamlFileArchetype()
+	private void mySqlYamlFileArchetype()
 	{
 		def yamlSkeleton = 
 		[
@@ -72,47 +73,22 @@ class YamlFileSkeleton
 			"username" : null,
 			"password" : null
 		]
-		
-		def yaml = new Yaml();
 
-		def yString = yaml.dump(yamlSkeleton);
-
-		FileWriter writer = null;
-		try
-		{
-			writer = new FileWriter(yamlFilePath);
-			writer.write(yString);
-		}
-		catch(FileNotFoundException fnf0)
-		{
-			LOGGER.error(fnf0.getMessage());
-		}
-		catch(IOException ioe0)
-		{
-			LOGGER.error(ioe0.getMessage());
-		}
-		finally
-		{
-			writer.flush();
-			writer.close();
-		}
-
-		
+		genericYamlFileArchetype(yamlSkeleton)
 	}
 
 	/**
 	* Generation d'un fichier yaml basé sur la map passée en paramètre par l'utilisateur: genericYamlFileArchetype(def maMap = [:])
 	*/
-	public void genericYamlFileArchetype(genericYamlSkeleton) throws DataIntegrityException
+	private void genericYamlFileArchetype(genericYamlSkeleton) throws DataIntegrityException
 	{
-		if(genericYamlSkeleton in [java.util.Map, java.util.List])
+		if(genericYamlSkeleton in Map || genericYamlSkeleton in List)
 		{
 			FileWriter writer = null;
 			def yaml = new Yaml();
 			def yString = yaml.dump(genericYamlSkeleton);
 			try 
 			{
-				yamlFilePath.createNewFile();
 				writer = new FileWriter(yamlFilePath);
 				writer.write(yString);
 			}
