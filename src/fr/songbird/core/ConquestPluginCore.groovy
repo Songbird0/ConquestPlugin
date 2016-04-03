@@ -7,6 +7,8 @@ import net.wytrem.logging.LoggerFactory
 
 import org.bukkit.Location
 
+import fr.songbird.groovyresources.YamlFileSkeleton
+
 
 
 class ConquestPluginCore 

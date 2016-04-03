@@ -2,6 +2,7 @@ package fr.songbird.config
 
 
 import fr.songbird.groovyresources.YamlFileSkeleton
+import fr.songbird.exceptions.DataIntegrityException
 
 /**
 *
@@ -23,7 +24,7 @@ class ConfigYamlFile
 
 
 
-	public static ConfigYamlFile getYamlFile(File file)
+	public static ConfigYamlFile getYamlFile(File file) throws DataIntegrityException
 	{
 		Object yamlFile = new YamlFileSkeleton().loadYamlFile(file);
 		if(yamlFile in java.util.Map)
@@ -32,7 +33,7 @@ class ConfigYamlFile
 		}
 		else
 		{
-			return null;
+			throw new DataIntegrityException("Le fichier de configuration a subi une modification trop profonde de la part de l'utilisateur, l'intégrité des données attendues est compromise.")
 		}
 	}
 }
