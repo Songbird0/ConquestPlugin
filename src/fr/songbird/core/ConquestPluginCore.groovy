@@ -8,6 +8,7 @@ import net.wytrem.logging.LoggerFactory
 import org.bukkit.Location
 
 import fr.songbird.groovyresources.YamlFileSkeleton
+import fr.songbird.config.ConfigYamlFile
 
 
 
@@ -16,7 +17,15 @@ class ConquestPluginCore
 
 	private static final BasicLogger LOGGER = LoggerFactory.getLogger(ConquestPluginCore.class);
 
+	/**
+	* Liste des listeners pour les déplacements du joueur.
+	*
+	*/
 	final def ell = new EventListenerList();
+
+	final def configFile;
+
+
 	/*
 	* Coordonnées de la zone WorldGuard
 	*/
@@ -30,11 +39,13 @@ class ConquestPluginCore
 	synchronized def RegionsSet;
 
 	/*
-	* Constructeur par défaut - destiné à recevoir les coordonnées du joueur cible dans un temps différent de celui de son appel.
+	* @yamlFile Chemin du fichier de configuration. (Le constructeur attend ici un objet File)
 	*/
-	ConquestPluginCore()
+	ConquestPluginCore(yamlFile)
 	{
+		assert yamlFile in java.io.File
 
+		
 	}
 
 	private def getRZL()
