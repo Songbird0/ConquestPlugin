@@ -13,7 +13,7 @@ import fr.songbird.exceptions.DataIntegrityException
 */
 class ConfigYamlFile 
 {
-	private final HashMap<String, Object> yamlFile;
+	private final HashMap<String, Object> yamlFile
 
 
 	private ConfigYamlFile(final HashMap<String, Object> yamlFile)
