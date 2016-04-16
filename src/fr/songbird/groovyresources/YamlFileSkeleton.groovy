@@ -9,7 +9,7 @@ import fr.songbird.exceptions.DataIntegrityException
 
 class YamlFileSkeleton 
 {
-	def yamlFilePath
+	final def yamlFilePath
 	
 	/**
 	 * Constructeur dédié au chargement d'un fichier yaml, et non à l'écriture.
