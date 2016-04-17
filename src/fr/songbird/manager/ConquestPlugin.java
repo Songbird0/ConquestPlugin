@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -36,8 +38,6 @@ import fr.songbird.scoreboard.StatNation;
 import net.wytrem.logging.BasicLogger;
 import net.wytrem.logging.LoggerFactory;
 
-import java.util.concurrent.*;
-
 
 /**
  * Classe principale chargée de faire le pont entre les différents composants du plugin (tels que le scoreboard), et de veiller aux changements d'états des régions représentant les villages sur la carte.
@@ -52,7 +52,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	private final Server server;
 	private final ExecutorService pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
-	
+	private final File filePath;
 	/**
 	* Référence vers une instance du coeur du plugin.
 	*
@@ -87,11 +87,16 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	}
 
 	{
+		CONFIGFILEPATH.mkdirs();
+		filePath = new File(new StringBuffer()
+			.append(CONFIGFILEPATH.toString())
+			.append(File.separator)
+			.append("config.yml").toString()
+			);
 		core = new ConquestPluginCore();
 	}
 	
-	public ConquestPlugin(){}
-	
+	public ConquestPlugin()
 	{
 		server = Bukkit.getServer();
 		stn = new StatNation();
@@ -159,10 +164,10 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 		File yamlFile = null;
 		try 
 		{
-			StringBuilder builder = new StringBuilder();
-			builder.append("ConquestPlugin_lib");
-			builder.append(File.separator);
-			builder.append("config.yml");
+			StringBuilder builder = new StringBuilder()
+			.append("ConquestPlugin_lib")
+			.append(File.separator)
+			.append("config.yml");
 			yamlFile = new File(builder.toString());
 			yamlFile.createNewFile();
 			InputStream in = new FileInputStream(yamlFile.getAbsolutePath());
