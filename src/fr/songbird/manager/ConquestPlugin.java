@@ -105,7 +105,17 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 			.append(File.separator)
 			.append("config.yml").toString()
 			);
-		core = new ConquestPluginCore();
+		if(!filePath.exists())
+		{
+			try
+			{
+				filePath.createNewFile();
+			}catch(IOException ioe0)
+			{
+				LOGGER.error(ioe0.getMessage());
+			}
+		}
+		core = new ConquestPluginCore(filePath);
 	}
 	
 	public ConquestPlugin()
