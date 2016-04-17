@@ -52,7 +52,19 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	private final Server server;
 	private final ExecutorService pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
+	/**
+	* <p>
+	* Chemin du fichier de configuration qui sera rechargé à chaque reboot du serveur.<br>
+	* Le rechargement du fichier à la volée n'est pas encore supportée dans cette version.
+	*
+	*
+	*
+	*
+	* </p>
+	*
+	*/
 	private final File filePath;
+
 	/**
 	* Référence vers une instance du coeur du plugin.
 	*
