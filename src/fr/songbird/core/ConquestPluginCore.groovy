@@ -10,6 +10,8 @@ import org.bukkit.Location
 import fr.songbird.groovyresources.YamlFileSkeleton
 import fr.songbird.config.ConfigYamlFile
 
+import fr.songbird.exceptions.DataIntegrityException
+
 
 
 class ConquestPluginCore 
@@ -45,7 +47,15 @@ class ConquestPluginCore
 	{
 		assert yamlFile in java.io.File
 
-		configFile = ConfigYamlFile.getYamlFile(yamlFile)
+		try 
+		{
+			configFile = ConfigYamlFile.getYamlFile(yamlFile)
+		}
+		catch(DataIntegrityException die0) 
+		{
+			LOGGER.error(die0.getMessage())	
+		}
+		
 	}
 
 	private def getRZL()
