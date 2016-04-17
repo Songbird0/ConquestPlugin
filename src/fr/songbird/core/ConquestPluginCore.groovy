@@ -45,7 +45,7 @@ class ConquestPluginCore
 	{
 		assert yamlFile in java.io.File
 
-		
+		configFile = ConfigYamlFile.getYamlFile(yamlFile)
 	}
 
 	private def getRZL()
