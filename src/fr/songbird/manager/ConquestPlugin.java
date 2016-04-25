@@ -52,6 +52,8 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	private final Server server;
 	private final ExecutorService pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
+	private final ConfigYamlFile configFile;
+
 	/**
 	* <p>
 	* Chemin du fichier de configuration qui sera rechargé à chaque reboot du serveur.<br>
@@ -128,6 +130,10 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 		if(plugin == null || !(plugin instanceof WorldGuardPlugin))
 		{
 			LOGGER.error("Le serveur n'a pas réussi à charger le plugin worldguard ou n'existe pas.");
+		}
+		else
+		{
+			core.setwGPlugin(plugin);
 		}
 		
 	}
@@ -269,9 +275,6 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 				public void run()
 				{
 					final Location location = pme.getPlayer().getLocation();
-					core.setX(location.getX());
-					core.setY(location.getY());
-					core.setZ(location.getZ());
 					core.setUserLocation(location);
 				}
 			});

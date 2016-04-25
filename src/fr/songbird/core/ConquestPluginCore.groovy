@@ -12,6 +12,11 @@ import fr.songbird.config.ConfigYamlFile
 
 import fr.songbird.exceptions.DataIntegrityException
 
+import com.sk89q.worldguard.bukkit.WGBukkit
+import com.sk89q.worldguard.protection.regions.ProtectedRegion
+
+import java.util.*
+
 
 
 class ConquestPluginCore 
@@ -28,10 +33,11 @@ class ConquestPluginCore
 	final def configFile;
 
 
-	/*
-	* Coordonnées de la zone WorldGuard
+	/**
+	* Reference vers la version de Worldguard en memoire
+	*
 	*/
-	synchronized def x, y, z;
+	def wGPlugin
 
 	/*
 	* Informations relatives à la position du joueur
@@ -86,8 +92,32 @@ class ConquestPluginCore
 	*/
 	public synchronized def run()
 	{
+		def x = userLocation.getX();
+		def y = userLocation.getY();
+		def z = userLocation.getZ();
 
-		
+		def regionsSet = WGBukkit.getRegionManager(configFile.getWorldName()).getApplicableRegions(userLocation)
+		def nameRegionsSet = configFile.getNameRegionsSet()
+
+		def compareTo = 
+		{
+			(region) -> 
+			for(Entry<String, String> entry : nameRegionsSet.entrySet())
+			{
+				def value = entry.getValue()
+				assert value in String : "Chaine de caracteres inexistante"
+
+				
+			}
+
+
+		}
+
+
+		for(ProtectedRegion region : regionsSet)
+		{
+
+		}
 
 	}
 
