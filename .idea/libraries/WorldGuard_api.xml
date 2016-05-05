@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="WorldGuard-api">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/MEGA/lib_java/WorldGuard-api.jar!/" />
+      <root url="jar://$USER_HOME$/MEGA/lib_java/worldedit-bukkit-6.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

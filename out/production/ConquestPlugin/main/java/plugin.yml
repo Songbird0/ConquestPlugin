@@ -1,0 +1,15 @@
+name: ConquestPlugin
+version: 0.0.13_4-ALPHA
+description: Conquest system of Dynastium
+author: Songbird
+website: https://github.com/Songbird0
+main: fr.songbird.manager.ConquestPlugin
+prefix: CONQUESTPLUG
+softdepend: [WorldGuard]
+commands:
+    nation:
+      description: Cette commande vous permet de choisir votre camp. Par defaut, vous etes dans la nation Neutral.
+      usage: /nation join <nation>
+
+
+

@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="MSH">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../MSH/bin" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../MSH/src" />
+    </SOURCES>
+  </library>
+</component>

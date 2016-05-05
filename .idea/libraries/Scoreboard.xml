@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Scoreboard">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../Scoreboard/bin" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../Scoreboard/src" />
+    </SOURCES>
+  </library>
+</component>

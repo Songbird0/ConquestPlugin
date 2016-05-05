@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Spigot-1.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/org/bukkit/Spigot/1.0/Spigot-1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
