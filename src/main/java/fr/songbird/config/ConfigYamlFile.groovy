@@ -82,7 +82,7 @@ class ConfigYamlFile implements ProgramConstants
         new YamlFileSkeleton
         (
             genericConfigFile,
-            new String("generic.skeleton"),
+            "generic.skeleton",
             [
                 "world": [
                             "hisName": "your world name"
