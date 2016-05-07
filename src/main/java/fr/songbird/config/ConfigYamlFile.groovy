@@ -57,7 +57,7 @@ class ConfigYamlFile implements ProgramConstants
 
     public static ConfigYamlFile getYamlFile(File file) throws DataIntegrityException
     {
-        Object yamlFile = new YamlFileSkeleton(file).loadYamlFile()
+        def yamlFile = new YamlFileSkeleton(file).loadYamlFile()
         if(yamlFile in Map)
         {
             return new ConfigYamlFile((HashMap<String, Object>)yamlFile);
