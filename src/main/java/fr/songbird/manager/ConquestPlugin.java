@@ -1,5 +1,6 @@
 package main.java.fr.songbird.manager;
 
+import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import fr.songbird.scoreboard.StatNation;
 import main.java.fr.songbird.commbdd.MySQLWrapper;
@@ -121,7 +122,9 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 		server = Bukkit.getServer();
 		stn = new StatNation();
 		playerProfiles = new LinkedList<>();
-		Plugin plugin = getServer().getPluginManager().getPlugin("WorldGuard");
+		Plugin worldGuard = getServer().getPluginManager().getPlugin("WorldGuard");
+        Plugin worldEdit = getServer().getPluginManager().getPlugin("WorldEdit"); 
+
         try {
             Object skeleton = new YamlFileSkeleton(mysqlConfigFile).loadYamlFile();
             assert (skeleton instanceof Map);
@@ -131,9 +134,9 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
             LOGGER.error(die0.getMessage());
         }
 
-        assert (plugin == null || !(plugin instanceof WorldGuardPlugin)) : "Le serveur n'a pas réussi à charger le plugin worldguard ou n'existe pas.";
-
-        core.setwGPlugin(plugin);
+        assert (worldGuard == null || !(worldGuard instanceof WorldGuardPlugin)) : "Le serveur n'a pas réussi à charger le plugin worldguard ou n'existe pas.";
+        assert (worldEdit == null || ! (worldEdit instanceof WorldEditPlugin)) : "Le serveur n'a pas réussi à charger le plugin worldedit ou n'existe pas.";
+        core.setwGPlugin(worldGuard);
 
 	}
 
