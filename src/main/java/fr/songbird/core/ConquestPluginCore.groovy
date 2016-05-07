@@ -96,17 +96,16 @@ class ConquestPluginCore
 		nameRegionsSet.entrySet().each
 		{
             Entry<String, String> entry ->
-			def value = entry.getValue()
-			assert value != null: "Chaine de caracteres inexistante"
+                def value = entry.getValue()
+                assert value != null: "Chaine de caracteres inexistante"
 
 		}
 
+        regionsSet.each
+         {
+             ProtectedRegion region ->
 
-
-		for(ProtectedRegion region : regionsSet)
-		{
-
-		}
+         }
 
 	}
 
