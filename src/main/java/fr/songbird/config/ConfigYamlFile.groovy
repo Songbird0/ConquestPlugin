@@ -77,8 +77,6 @@ class ConfigYamlFile implements ProgramConstants
     {
         CONFIGFILEPATH.mkdirs();
 
-        final File genericConfigFile = new File(new StringBuffer().append(CONFIGFILEPATH.toString()).append(File.separator).append("config.yml").toString());
-
         new YamlFileSkeleton
         (
             genericConfigFile,
@@ -99,8 +97,6 @@ class ConfigYamlFile implements ProgramConstants
                            ]
             ]
         )
-
-        final File mysqlConfigFile = new File(new StringBuffer().append(CONFIGFILEPATH.toString()).append(File.separator).append("mysqlconfig.yml").toString());
 
         new YamlFileSkeleton(mysqlConfigFile, "mysql.skeleton")
     }
