@@ -8,6 +8,7 @@ import main.java.fr.songbird.constants.ProgramConstants;
 import main.java.fr.songbird.core.ConquestPluginCore;
 import main.java.fr.songbird.core.ReachedZoneListener;
 import main.java.fr.songbird.exceptions.DataIntegrityException;
+import main.java.fr.songbird.groovyresources.YamlFileSkeleton;
 import main.java.fr.songbird.nation.Nation;
 import net.wytrem.logging.BasicLogger;
 import net.wytrem.logging.LoggerFactory;
@@ -121,14 +122,18 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 		stn = new StatNation();
 		playerProfiles = new LinkedList<>();
 		Plugin plugin = getServer().getPluginManager().getPlugin("WorldGuard");
-		msw = new MySQLWrapper("")
+        try {
+            Object skeleton = new YamlFileSkeleton(mysqlConfigFile).loadYamlFile();
+            assert (skeleton instanceof Map);
+            msw = getBDDConnection((Map<String, String>)skeleton);
+        } catch (DataIntegrityException die0)
+        {
+            LOGGER.error(die0.getMessage());
+        }
 
-		if(plugin == null || !(plugin instanceof WorldGuardPlugin))
-		{
-			LOGGER.error("Le serveur n'a pas réussi à charger le plugin worldguard ou n'existe pas.");
-		}
-		else
-			core.setwGPlugin(plugin);
+        assert (plugin == null || !(plugin instanceof WorldGuardPlugin)) : "Le serveur n'a pas réussi à charger le plugin worldguard ou n'existe pas.";
+
+        core.setwGPlugin(plugin);
 
 	}
 
@@ -179,7 +184,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	@Deprecated
 	public static MySQLWrapper parsingYamlFile()
 	{
-		File yamlFile = null;
+		File yamlFile;
 		try
 		{
 			StringBuilder builder = new StringBuilder()
