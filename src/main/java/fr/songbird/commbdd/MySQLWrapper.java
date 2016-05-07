@@ -1,9 +1,7 @@
 package main.java.fr.songbird.commbdd;
 
 
-import com.huskehhh.mysql.mysql.MySQL;
-
-public class MySQLWrapper extends MySQL
+public class MySQLWrapper
 {
 	
 
@@ -16,7 +14,7 @@ public class MySQLWrapper extends MySQL
 	 */
 	public MySQLWrapper(String hostname, String port, String username, String password) 
 	{
-		super(hostname, port, username, password);
+
 	}
 
 }
