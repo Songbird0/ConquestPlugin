@@ -119,7 +119,7 @@ class YamlFileSkeleton implements YamlFileSkeletonKeywords
 
 	public Object loadYamlFile()
 	{
-		InputStream inputStream = new FileInputStream(yamlFilePath);
+		InputStream inputStream = new FileInputStream((File)yamlFilePath);
 
 		def yaml = new Yaml();
 		def object = yaml.load(inputStream);
