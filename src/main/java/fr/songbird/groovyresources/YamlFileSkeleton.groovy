@@ -5,7 +5,7 @@ import org.yaml.snakeyaml.Yaml
 
 import static main.java.fr.songbird.manager.ConquestPlugin.LOGGER
 
-class YamlFileSkeleton
+class YamlFileSkeleton implements YamlFileSkeletonKeywords
 {
 	final def yamlFilePath
 
@@ -35,7 +35,7 @@ class YamlFileSkeleton
 
 		switch(skeletonName)
 		{
-			case "mysql.skeleton" : mySqlYamlFileArchetype(); break;
+			case sqlKeyword : mySqlYamlFileArchetype(); break;
 			default:
 				StringBuilder builder = new StringBuilder();
 				builder.append("Le mot-clé que vous avez renseigné (").append(skeletonName).append(") est inconnu, ou n'a pas été utilisé avec le constructeur adéquat.\nVeuillez vous référer à la javadoc.")
