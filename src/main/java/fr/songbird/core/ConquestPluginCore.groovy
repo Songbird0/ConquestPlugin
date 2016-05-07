@@ -93,13 +93,13 @@ class ConquestPluginCore
 		def regionsSet = WGBukkit.getRegionManager(configFile.getWorldName()).getApplicableRegions(userLocation)
 		def nameRegionsSet = configFile.getNameRegionsSet()
 
-			for(Entry<String, String> entry : nameRegionsSet.entrySet())
-			{
-				def value = entry.getValue()
-				assert value != null : "Chaine de caracteres inexistante"
+		nameRegionsSet.entrySet().each
+		{
+            Entry<String, String> entry ->
+			def value = entry.getValue()
+			assert value != null: "Chaine de caracteres inexistante"
 
-
-			}
+		}
 
 
 
