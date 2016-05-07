@@ -119,8 +119,9 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	{
 		server = Bukkit.getServer();
 		stn = new StatNation();
-		playerProfiles = new LinkedList<JSONObject>();
+		playerProfiles = new LinkedList<>();
 		Plugin plugin = getServer().getPluginManager().getPlugin("WorldGuard");
+		msw = new MySQLWrapper("")
 
 		if(plugin == null || !(plugin instanceof WorldGuardPlugin))
 		{
@@ -134,7 +135,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 
 	private static void setNations(final Nation...nations)
 	{
-		ConquestPlugin.nations = new LinkedList<Nation>();
+		ConquestPlugin.nations = new LinkedList<>();
 
 		for(Nation nation : nations)
 			ConquestPlugin.nations.add(nation);
@@ -152,7 +153,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 
 	private static boolean datasIntegrityChecking(Map<String, String> data)
 	{
-		HashMap<String, String> dispoTab = new HashMap<String, String>(); //Tableau associatif charge de recolter le status de chaque cles (presentes ou non)
+		HashMap<String, String> dispoTab = new HashMap<>(); //Tableau associatif charge de recolter le status de chaque cles (presentes ou non)
 		for(Entry<String, String> entries: data.entrySet())
 		{
 			if(entries.getValue() != null)
@@ -176,7 +177,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	*
 	*/
 	@Deprecated
-	public static final MySQLWrapper parsingYamlFile()
+	public static MySQLWrapper parsingYamlFile()
 	{
 		File yamlFile = null;
 		try
