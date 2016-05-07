@@ -45,7 +45,7 @@ class ConfigYamlFile implements ProgramConstants
     public def getNameRegionsSet()
     {
 
-    	assert yamlFile.get("regions") in Map : "la map regions ne possede pas les enfants attendus"
+    	assert yamlFile.get("regions") in Map : "Regions n'est pas une table de hashage"
     	assert yamlFile.get("regions").get("theirName") in Map : "theirName n'existe pas"
 
     	return yamlFile.get("regions").get("theirName")
