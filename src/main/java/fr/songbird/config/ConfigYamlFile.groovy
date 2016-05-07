@@ -79,7 +79,7 @@ class ConfigYamlFile implements ProgramConstants
 
         final File genericConfigFile = new File(new StringBuffer().append(CONFIGFILEPATH.toString()).append(File.separator).append("config.yml").toString());
 
-        def skeleton = new YamlFileSkeleton
+        new YamlFileSkeleton
         (
             genericConfigFile,
             new String("generic.skeleton"),
@@ -102,6 +102,6 @@ class ConfigYamlFile implements ProgramConstants
 
         final File mysqlConfigFile = new File(new StringBuffer().append(CONFIGFILEPATH.toString()).append(File.separator).append("mysqlconfig.yml").toString());
 
-        def mysqlSkeleton = new YamlFileSkeleton(mysqlConfigFile, "mysql.skeleton")
+        new YamlFileSkeleton(mysqlConfigFile, "mysql.skeleton")
     }
 }
