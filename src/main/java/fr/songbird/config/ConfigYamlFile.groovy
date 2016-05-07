@@ -69,7 +69,7 @@ class ConfigYamlFile implements ProgramConstants
 
     /**
     *
-    *    Ecriture du fichier de base
+    *    Ecriture du fichier de base et construction du fichier de configuration pour connecter le plugin a la base de donnees.
     *
     *
     */
@@ -100,5 +100,8 @@ class ConfigYamlFile implements ProgramConstants
             ]
         )
 
+        final File mysqlConfigFile = new File(new StringBuffer().append(CONFIGFILEPATH.toString()).append(File.separator).append("mysqlconfig.yml").toString());
+
+        def mysqlSkeleton = new YamlFileSkeleton(mysqlConfigFile, "mysql.skeleton")
     }
 }
