@@ -87,7 +87,7 @@ class YamlFileSkeleton implements YamlFileSkeletonKeywords
 			def yString = yaml.dump(genericYamlSkeleton);
 			try
 			{
-				writer = new FileWriter(yamlFilePath);
+				writer = new FileWriter((File)yamlFilePath);
 				writer.write(yString);
 			}
 			catch(FileNotFoundException fnf1)
