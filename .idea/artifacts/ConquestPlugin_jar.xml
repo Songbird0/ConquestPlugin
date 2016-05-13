@@ -1,0 +1,21 @@
+<component name="ArtifactManager">
+  <artifact name="ConquestPlugin:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ConquestPlugin_jar</output-path>
+    <root id="root">
+      <element id="archive" name="ConquestPlugin.jar">
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/out/META-INF/MANIFEST.MF" />
+        </element>
+        <element id="module-output" name="ConquestPlugin" />
+        <element id="dir-copy" path="$PROJECT_DIR$/../MSH/bin" />
+        <element id="dir-copy" path="$PROJECT_DIR$/../Scoreboard/bin" />
+        <element id="dir-copy" path="$PROJECT_DIR$/../snakeyaml/target" />
+        <element id="dir-copy" path="$PROJECT_DIR$/../TheBareMinimum/bin" />
+      </element>
+      <element id="library" level="project" name="WorldGuard-api" />
+      <element id="library" level="project" name="WyLog_v2" />
+      <element id="library" level="application" name="groovy-2.4.6" />
+      <element id="library" level="project" name="Spigot-1.0" />
+    </root>
+  </artifact>
+</component>
