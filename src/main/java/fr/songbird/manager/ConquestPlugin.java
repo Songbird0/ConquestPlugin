@@ -147,6 +147,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 
 		for(Nation nation : nations)
 			ConquestPlugin.nations.add(nation);
+		ConquestPlugin.nations = (LinkedList)Arrays.asList(nations);
 	}
 
 	private static MySQLWrapper getBDDConnection(Map<String, String> data) throws DataIntegrityException
