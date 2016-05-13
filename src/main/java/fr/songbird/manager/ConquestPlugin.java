@@ -27,7 +27,6 @@ import org.json.simple.JSONObject;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.HashMap;
@@ -124,7 +123,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 		stn = new StatNation();
 		playerProfiles = new LinkedList<>();
 		Plugin worldGuard = getServer().getPluginManager().getPlugin("WorldGuard");
-        Plugin worldEdit = getServer().getPluginManager().getPlugin("WorldEdit"); 
+        Plugin worldEdit = getServer().getPluginManager().getPlugin("WorldEdit");
 
         try {
             Object skeleton = new YamlFileSkeleton(mysqlConfigFile).loadYamlFile();
@@ -144,22 +143,10 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 
 	private static void setNations(final Nation...nations)
 	{
-		ConquestPlugin.nations = new LinkedList<>();
-
-		for(Nation nation : nations)
-			ConquestPlugin.nations.add(nation);
 		ConquestPlugin.nations = (LinkedList)Arrays.asList(nations);
 	}
 
-	private static MySQLWrapper getBDDConnection(Map<String, String> data) throws DataIntegrityException
-	{
-		if(datasIntegrityChecking(data))
-		{
-			return new MySQLWrapper(data.get("hostname"), data.get("port"), data.get("username"), data.get("password"));
-		}
-		else
-			throw new DataIntegrityException("L'intégrité des données est compromise. Veillez à compléter correctement le document avant de relancer le plugin.");
-	}
+
 
 	private static boolean datasIntegrityChecking(Map<String, String> data)
 	{
@@ -225,6 +212,16 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 		return null;
 	}
 
+    public static MySQLWrapper getBDDConnection(Map<String, String> data) throws DataIntegrityException
+    {
+        if(datasIntegrityChecking(data))
+        {
+            return new MySQLWrapper(data.get("hostname"), data.get("port"), data.get("username"), data.get("password"));
+        }
+        else
+            throw new DataIntegrityException("L'intégrité des données est compromise. Veillez à compléter correctement le document avant de relancer le plugin.");
+    }
+
 	public final static String formatClassName(Class<?> clazz)
 	{
 		return clazz.getName().substring(clazz.getName().lastIndexOf(".")+1);
@@ -254,6 +251,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
         {
             LOGGER.error(ioe0.getMessage());
         }
+
 		setNations
 		(
 			new Nation("Neutral", 0, score.registerNewTeam("neutral")),
@@ -284,6 +282,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 				public void run()
 				{
 					final org.bukkit.Location location = pme.getPlayer().getLocation();
+                    LOGGER.info(new StringBuffer().append("Position du joueur:\n").append("x: ").append(location.getX()).append("\ny: ").append(location.getY()).append("\nz: ").append(location.getZ()).toString());
 					core.setUserLocation(location);
 				}
 			});
