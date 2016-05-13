@@ -245,6 +245,15 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 		final Scoreboard score = Bukkit.getScoreboardManager().getNewScoreboard();
 		this.getCommand(COMMANDCORE).setExecutor(new NationCommand());
 
+        try
+        {
+            File tracer = new File(CONFIGFILEPATH.toString() + File.separator + "tracer.txt");
+            tracer.createNewFile();
+            System.setOut(new PrintStream(tracer));
+        }catch(IOException ioe0)
+        {
+            LOGGER.error(ioe0.getMessage());
+        }
 		setNations
 		(
 			new Nation("Neutral", 0, score.registerNewTeam("neutral")),
