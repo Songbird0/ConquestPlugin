@@ -28,10 +28,10 @@ public class PlayerWrapper
 	{
 
 		StringBuilder builder = new StringBuilder();
-		builder.append(ConquestPlugin.formatClassName(ConquestPlugin.class));
-		builder.append("_lib");
-		builder.append(File.separator);
-		builder.append("bdd");
+		builder.append(ConquestPlugin.formatClassName(ConquestPlugin.class))
+		.append("_lib")
+		.append(File.separator)
+		.append("bdd");
 		bddPath = new File (builder.toString());
 	}
 
