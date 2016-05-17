@@ -9,12 +9,15 @@ import org.json.simple.parser.ParseException;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import static main.java.fr.songbird.manager.ConquestPlugin.LOGGER;
 
 public class PlayerWrapper
 {
 	private JSONObject profile;
+	private int battlePoint;
+    private int honorPoint;
 	private static File bddPath;
 
 	{
@@ -77,8 +80,11 @@ public class PlayerWrapper
 		{
 			try
 			{
-				writer.flush();
-				writer.close();
+				if(writer != null)
+				{
+                    writer.flush();
+                    writer.close();
+				}
 			}catch(IOException ioe1)
 			{
 				LOGGER.error(ioe1.getMessage());
@@ -123,13 +129,13 @@ public class PlayerWrapper
 		return false;
 	}
 
-	public static void setPlayerProfile(Player player, ArrayList<JSONObject> playerProfiles)
+	public static void setPlayerProfile(Player player, LinkedList<JSONObject> playerProfiles)
 	{
 		JSONParser parser = new JSONParser();
 
 		try
 		{
-			StringBuffer buffer = new StringBuffer();
+			StringBuilder buffer = new StringBuilder();
 			buffer.append(bddPath);
 			buffer.append(File.separator);
 			buffer.append(player.getName());
@@ -138,9 +144,6 @@ public class PlayerWrapper
 			JSONObject jO = (JSONObject)parser.parse(new FileReader(buffer.toString()));
 
 			playerProfiles.add(jO);
-		}catch(FileNotFoundException fnf0)
-		{
-			LOGGER.error(fnf0.getMessage());
 		}catch(IOException ioe0)
 		{
 			LOGGER.error(ioe0.getMessage());
