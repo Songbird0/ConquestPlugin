@@ -15,6 +15,8 @@ import net.wytrem.logging.BasicLogger;
 import net.wytrem.logging.LoggerFactory;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
+import org.bukkit.entity.Animals;
+import org.bukkit.entity.Monster;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -94,6 +96,13 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	{
 		loader = new Yaml();
 		LOGGER =  LoggerFactory.getLogger(ConquestPlugin.class);
+		if(!ConfigYamlFile.checkConfigFile())
+        {
+            LOGGER.warning("Config files doesn't exists.\nCreating...");
+            ConfigYamlFile.setBasicConfigFileArchetype();
+        }
+        else
+            LOGGER.success("Config files loaded.");
 	}
 
 	{
@@ -222,12 +231,12 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
             throw new DataIntegrityException("L'intégrité des données est compromise. Veillez à compléter correctement le document avant de relancer le plugin.");
     }
 
-	public final static String formatClassName(Class<?> clazz)
+	public static String formatClassName(Class<?> clazz)
 	{
 		return clazz.getName().substring(clazz.getName().lastIndexOf(".")+1);
 	}
 
-	public static final LinkedList<Nation> getNations()
+	public static LinkedList<Nation> getNations()
 	{
 		return ConquestPlugin.nations;
 	}
@@ -288,7 +297,16 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 			});
 	}
 
-	@EventHandler(priority = EventPriority.HIGH)
+	@EventHandler
+    public void whenEntityIsDead(org.bukkit.event.entity.EntityDeathEvent ede)
+    {
+        if(ede.getEntity() instanceof Monster || ede.getEntity() instanceof Animals)
+        {
+
+        }
+    }
+
+	@EventHandler(priority = EventPriority.NORMAL)
 	public void whenPlayerJoin(PlayerJoinEvent pje)
 	{
 		pje.getPlayer().setScoreboard(stn.getCurrentScoreboard());
