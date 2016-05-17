@@ -43,6 +43,7 @@ public class PlayerWrapper
 		profile.put("uuid", player.getUniqueId());
 		profile.put("nation", nation.getNationName());
 		profile.put("position", player.getLocation());
+		profile.put("point de bataille", 0);
 		writeProfile(profile);
 	}
 
