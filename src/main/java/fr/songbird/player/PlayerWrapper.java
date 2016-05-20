@@ -13,6 +13,13 @@ import java.util.LinkedList;
 
 import static main.java.fr.songbird.manager.ConquestPlugin.LOGGER;
 
+/**
+ * <p>
+ *     Cette classe encapsule une instance de la classe Player censée représenter un joueur présent sur le serveur. <br>
+ *     Elle encapsule également une instance de la classe Nation censée appartenir à l'instance du joueur.
+ * </p>
+ * @author Songbird
+ */
 public class PlayerWrapper
 {
 	private JSONObject profile;
