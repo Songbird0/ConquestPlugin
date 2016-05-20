@@ -59,6 +59,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	private final ExecutorService pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
 	private final ConfigYamlFile configFile;
+	private final ConfigYamlFile configFile; //fichier de configuration relatif au coeur du plugin
 
 	/**
 	* <p>
