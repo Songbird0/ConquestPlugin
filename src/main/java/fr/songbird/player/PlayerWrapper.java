@@ -8,7 +8,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 import static main.java.fr.songbird.manager.ConquestPlugin.LOGGER;
@@ -23,8 +22,8 @@ import static main.java.fr.songbird.manager.ConquestPlugin.LOGGER;
 public class PlayerWrapper
 {
 	private JSONObject profile;
-	private int battlePoint;
-    private int honorPoint;
+	private int battlePoints;
+    private int honorPoints;
 	private static File bddPath;
 
 	{
@@ -43,8 +42,6 @@ public class PlayerWrapper
 	}
 
 
-
-	public PlayerWrapper(final Player player, final Nation nation)
 	/**
      *
 	 * @param player L'instance du joueur
@@ -56,8 +53,6 @@ public class PlayerWrapper
 		profile.put("uuid", player.getUniqueId());
 		profile.put("nation", nation.getNationName());
 		profile.put("position", player.getLocation());
-		profile.put("point de bataille", 0);
-        profile.put("point d'honneur", 0);
 		profile.put("point de bataille", battlePoints);
         profile.put("point d'honneur", honorPoints);
 		writeProfile(profile);
@@ -104,29 +99,35 @@ public class PlayerWrapper
     {
         return this.profile;
     }
+
+    /**
+     *
+     * @param profile
+     */
 	private void writeProfile(final JSONObject profile)
 	{
 		StringBuilder builder = new StringBuilder();
-		builder.append("Construction du chemin");
-		builder.append(bddPath.getAbsolutePath());
-		builder.append(": ");
-		builder.append(bddPath.mkdir());
+		builder.append("Construction du chemin")
+		.append(bddPath.getAbsolutePath())
+		.append(": ")
+		.append(bddPath.mkdir());
 		LOGGER.info(builder.toString());
 
 		builder.delete(0, builder.length());
-		builder.append(bddPath.getAbsolutePath());
-		builder.append(File.separator);
-		builder.append(profile.get("username"));
-		builder.append(".json");
+		builder.append(bddPath.getAbsolutePath())
+		.append(File.separator)
+		.append(profile.get("username"))
+		.append(".json");
 
 		final File bddFilePath = new File(builder.toString());
 		FileWriter writer = null;
 
 		try
 		{
-			writer = new FileWriter(bddFilePath);
 
-			writer.write(profile.toJSONString());
+                writer = new FileWriter(bddFilePath);
+
+                writer.write(profile.toJSONString());
 
 		}catch(IOException ioe0)
 		{
@@ -196,10 +197,10 @@ public class PlayerWrapper
 			buffer.append(File.separator);
 			buffer.append(player.getName());
 			buffer.append(".json");
-
+            assert(heExists(player.getName())) : "Le fichier n'existe pas.";
 			JSONObject jO = (JSONObject)parser.parse(new FileReader(buffer.toString()));
 
-			playerProfiles.add(jO);
+
 		}catch(IOException ioe0)
 		{
 			LOGGER.error(ioe0.getMessage());
