@@ -196,7 +196,6 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
         }
         if(datasIntegrityChecking(data))
         {
-            return new MySQLWrapper(data.get("hostname"), data.get("port"), data.get("username"), data.get("password"));
         }
         else
             throw new DataIntegrityException("L'intégrité des données est compromise. Veillez à compléter correctement le document avant de relancer le plugin.");
