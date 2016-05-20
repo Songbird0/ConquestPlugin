@@ -160,7 +160,6 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
         }
 
         assert (worldGuard == null || !(worldGuard instanceof WorldGuardPlugin)) : "Le serveur n'a pas réussi à charger le plugin worldguard ou n'existe pas.";
-        assert (worldEdit == null || ! (worldEdit instanceof WorldEditPlugin)) : "Le serveur n'a pas réussi à charger le plugin worldedit ou n'existe pas.";
         core.setwGPlugin(worldGuard);
 
 	}
