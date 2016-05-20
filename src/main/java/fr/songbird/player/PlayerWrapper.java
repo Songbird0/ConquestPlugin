@@ -185,7 +185,7 @@ public class PlayerWrapper
 		return false;
 	}
 
-	public static void setPlayerProfile(Player player, LinkedList<JSONObject> playerProfiles)
+	public static void loadPlayerProfile(Player player, LinkedList<PlayerWrapper> playerProfiles)
 	{
 		JSONParser parser = new JSONParser();
 
