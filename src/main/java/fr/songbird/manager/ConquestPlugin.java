@@ -187,6 +187,13 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 
     public static java.sql.Connection getBDDConnection(Map<String, String> data) throws DataIntegrityException
     {
+        try
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+        } catch (ClassNotFoundException e)
+        {
+            LOGGER.error("Driver's class have not been loaded.");
+        }
         if(datasIntegrityChecking(data))
         {
             return new MySQLWrapper(data.get("hostname"), data.get("port"), data.get("username"), data.get("password"));
