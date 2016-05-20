@@ -149,7 +149,6 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 		stn = new StatNation();
 		playerProfiles = new LinkedList<>();
 		Plugin worldGuard = getServer().getPluginManager().getPlugin("WorldGuard");
-        Plugin worldEdit = getServer().getPluginManager().getPlugin("WorldEdit");
 
         try {
             Object skeleton = new YamlFileSkeleton(mysqlConfigFile).loadYamlFile();
