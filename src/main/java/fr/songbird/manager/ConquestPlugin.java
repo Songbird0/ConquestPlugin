@@ -296,7 +296,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
         }
     }
 
-	@EventHandler(priority = EventPriority.NORMAL)
+	@EventHandler
 	public void whenPlayerJoin(PlayerJoinEvent pje)
 	{
 		pje.getPlayer().setScoreboard(stn.getCurrentScoreboard());
