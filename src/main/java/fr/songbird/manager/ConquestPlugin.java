@@ -1,6 +1,6 @@
 package main.java.fr.songbird.manager;
 
-import com.sk89q.worldedit.bukkit.WorldEditPlugin;
+
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import fr.songbird.scoreboard.StatNation;
 import main.java.fr.songbird.commbdd.MySQLWrapper;
@@ -33,10 +33,6 @@ import org.json.simple.JSONObject;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.HashMap;
-import java.util.Map;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -58,7 +54,6 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	private final Server server;
 	private final ExecutorService pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
-	private final ConfigYamlFile configFile;
 	private final ConfigYamlFile configFile; //fichier de configuration relatif au coeur du plugin
     private ConfigYamlFile sqlConfigFile;
 
@@ -89,7 +84,6 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	/**
 	* Profils des joueurs.
 	*/
-
 	private LinkedList<JSONObject> playerProfiles;
 	/**
 	 * Parser du fichier de configuration.
@@ -158,7 +152,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 
 	private static void setNations(final Nation...nations)
 	{
-		ConquestPlugin.nations = (LinkedList)Arrays.asList(nations);
+		ConquestPlugin.nations = (LinkedList) Arrays.asList(nations);
 	}
 
 
@@ -252,7 +246,6 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 		stn.setCurrentScoreboard(score);
 
 		stn.initializeScoreboard();
-
         LOGGER.info(new StringBuilder().append("Start in ").append(Long.toString((new Date().getTime() - start))).append("ms").toString());
 	}
 
@@ -272,7 +265,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 				public void run()
 				{
 					final org.bukkit.Location location = pme.getPlayer().getLocation();
-                    LOGGER.info(new StringBuffer().append("Position du joueur:\n").append("x: ").append(location.getX()).append("\ny: ").append(location.getY()).append("\nz: ").append(location.getZ()).toString());
+                    LOGGER.info(new StringBuilder().append("Position du joueur:\n").append("x: ").append(location.getX()).append("\ny: ").append(location.getY()).append("\nz: ").append(location.getZ()).toString());
 					core.setUserLocation(location);
 				}
 			});
@@ -300,6 +293,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	public void whenPlayerJoin(PlayerJoinEvent pje)
 	{
 		pje.getPlayer().setScoreboard(stn.getCurrentScoreboard());
+
 	}
 
 	@EventHandler
@@ -331,7 +325,6 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 		return this.playerProfiles;
 	}
 
-	public static void main(String[] args)
 	public static void main(String... args)
 	{
 
