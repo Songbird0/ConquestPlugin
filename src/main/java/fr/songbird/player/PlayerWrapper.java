@@ -52,6 +52,8 @@ public class PlayerWrapper
 		profile.put("position", player.getLocation());
 		profile.put("point de bataille", 0);
         profile.put("point d'honneur", 0);
+		profile.put("point de bataille", battlePoints);
+        profile.put("point d'honneur", honorPoints);
 		writeProfile(profile);
 	}
 
