@@ -196,9 +196,18 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
         }
         if(datasIntegrityChecking(data))
         {
+            try
+            {
+                return DriverManager.getConnection(data.get("hostname"), data.get("username"), data.get("password"));
+            } catch (SQLException e)
+            {
+                LOGGER.error("An error was occurred while establishing connection: "+e.getMessage());
+            }
         }
         else
             throw new DataIntegrityException("L'intégrité des données est compromise. Veillez à compléter correctement le document avant de relancer le plugin.");
+
+        return null;
     }
 
 	public static String formatClassName(Class<?> clazz)
