@@ -302,6 +302,24 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 		pje.getPlayer().setScoreboard(stn.getCurrentScoreboard());
 	}
 
+	@EventHandler
+    public void whenPlayerQuit(PlayerQuitEvent pqe)
+    {
+        List<JSONObject> playerProfilesOccurrence = new LinkedList<>(); //On recupere toutes les occurrences du joueur si il en existe plusieurs.
+        for(JSONObject jsonObject : playerProfiles)
+        {
+            String username = (String)jsonObject.get(pqe.getPlayer().getName());
+            if(username != null)
+            {
+                if(username.equals(pqe.getPlayer().getName()))
+                {
+                    playerProfilesOccurrence.add(jsonObject);
+                }
+            }
+        }
+        playerProfiles.removeAll(playerProfilesOccurrence); //On libere la memoire
+    }
+
 	@Override
 	public void whenZoneHasBeenReached()
 	{
@@ -314,6 +332,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	}
 
 	public static void main(String[] args)
+	public static void main(String... args)
 	{
 
 	}
