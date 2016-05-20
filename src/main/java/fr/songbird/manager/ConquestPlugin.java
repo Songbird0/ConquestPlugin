@@ -194,49 +194,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	}
 
 
-	/**
-	* Méthode encore utilisée, mais peu recommandée.
-	* Le générateur de fichiers de configuration écrit en groovy est bien plus propre.
-	*
-	*/
-	@Deprecated
-	public static MySQLWrapper parsingYamlFile()
-	{
-		File yamlFile;
-		try
-		{
-			StringBuilder builder = new StringBuilder()
-			.append("ConquestPlugin_lib")
-			.append(File.separator)
-			.append("config.yml");
-			yamlFile = new File(builder.toString());
-			yamlFile.createNewFile();
-			InputStream in = new FileInputStream(yamlFile.getAbsolutePath());
 
-
-			@SuppressWarnings("unchecked")
-			Map<String, String> object = (Map<String, String>)loader.load(in);
-
-
-			LOGGER.info("object: "+object);
-
-
-
-			return getBDDConnection(object);
-
-		} catch (FileNotFoundException fnfe0)
-		{
-			LOGGER.error(fnfe0.getMessage());
-		} catch(IOException ioe0)
-		{
-			LOGGER.error(ioe0.getMessage());
-		} catch(Exception e0)
-		{
-			LOGGER.error(e0.getMessage());
-		}
-
-		return null;
-	}
 
     public static MySQLWrapper getBDDConnection(Map<String, String> data) throws DataIntegrityException
     {
