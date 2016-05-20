@@ -67,6 +67,14 @@ public class PlayerWrapper
     }
 
     /**
+     * Ajoute des points d'honneur au joueur.
+     * @param honorPoints Nombre de points d'honneur à ajouter.
+     */
+    public void addHonorPoints(final int honorPoints)
+    {
+        this.honorPoints += honorPoints;
+    }
+
 	private void writeProfile(final JSONObject profile)
 	{
 		StringBuilder builder = new StringBuilder();
