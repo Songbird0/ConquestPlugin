@@ -89,8 +89,8 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	/**
 	* Profils des joueurs.
 	*/
-	private LinkedList<JSONObject> playerProfiles; //TODO Remplacer l'ArrayList par une LinkedList ou équivalent - trop coûteux en ressources
 
+	private LinkedList<JSONObject> playerProfiles;
 	/**
 	 * Parser du fichier de configuration.
 	 */
