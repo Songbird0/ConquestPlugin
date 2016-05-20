@@ -150,15 +150,6 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 		playerProfiles = new LinkedList<>();
 		Plugin worldGuard = getServer().getPluginManager().getPlugin("WorldGuard");
 
-        try {
-            Object skeleton = new YamlFileSkeleton(mysqlConfigFile).loadYamlFile();
-            assert (skeleton instanceof Map);
-            msw = getBDDConnection((Map<String, String>)skeleton);
-        } catch (DataIntegrityException die0)
-        {
-            LOGGER.error(die0.getMessage());
-        }
-
         assert (worldGuard == null || !(worldGuard instanceof WorldGuardPlugin)) : "Le serveur n'a pas réussi à charger le plugin worldguard ou n'existe pas.";
         core.setwGPlugin(worldGuard);
 
