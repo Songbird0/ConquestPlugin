@@ -100,6 +100,10 @@ public class PlayerWrapper
     }
 
 
+    public JSONObject getPlayerProfile()
+    {
+        return this.profile;
+    }
 	private void writeProfile(final JSONObject profile)
 	{
 		StringBuilder builder = new StringBuilder();
