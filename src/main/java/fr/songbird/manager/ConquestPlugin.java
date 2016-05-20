@@ -225,6 +225,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	@Override
 	public void onEnable()
 	{
+		long start = new Date().getTime();
 		server.getPluginManager().registerEvents(this, this);
 		core.addReachedZoneListener(this);
 		final Scoreboard score = Bukkit.getScoreboardManager().getNewScoreboard();
@@ -252,6 +253,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 
 		stn.initializeScoreboard();
 
+        LOGGER.info(new StringBuilder().append("Start in ").append(Long.toString((new Date().getTime() - start))).append("ms").toString());
 	}
 
 	@Override
