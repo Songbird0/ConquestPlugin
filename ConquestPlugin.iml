@@ -15,5 +15,6 @@
     <orderEntry type="library" name="Spigot-1.0" level="project" />
     <orderEntry type="library" name="WyLog_v2" level="project" />
     <orderEntry type="library" name="WorldGuard-api" level="project" />
+    <orderEntry type="library" name="mysql-connector-java-5.1.38-bin" level="project" />
   </component>
 </module>
