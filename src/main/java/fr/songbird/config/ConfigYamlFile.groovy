@@ -26,6 +26,13 @@ class ConfigYamlFile implements ProgramConstants
     //###### DYNAMIC/INSTANCE METHODS ######
 
 
+
+    public def getYamlMap()
+    {
+        return yamlFile;
+    }
+
+
     public String getWorldName() throws DataIntegrityException
     {
     	if(!null.equals(yamlFile.get("world")))
