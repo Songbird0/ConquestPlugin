@@ -281,7 +281,16 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	@EventHandler
     public void whenEntityIsDead(org.bukkit.event.entity.EntityDeathEvent ede)
     {
-        if(ede.getEntity() instanceof Monster || ede.getEntity() instanceof Animals)
+        LivingEntity entity = ede.getEntity();
+        Entity killer = entity.getKiller();
+        if(entity instanceof Monster || entity instanceof Animals)
+        {
+            if(killer instanceof org.bukkit.entity.Player)
+            {
+                killer = (org.bukkit.entity.Player)killer;
+            }
+        }
+        else if(entity instanceof org.bukkit.entity.Player)
         {
 
         }
