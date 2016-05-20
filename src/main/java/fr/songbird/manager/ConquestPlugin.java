@@ -54,7 +54,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 {
 
 
-	private MySQLWrapper msw;
+	private Connection sqlConnection;
 	private final Server server;
 	private final ExecutorService pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
