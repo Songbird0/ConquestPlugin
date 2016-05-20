@@ -134,6 +134,13 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 		}
 		core = new ConquestPluginCore(filePath);
 		configFile = (ConfigYamlFile)core.getConfigFile();
+        try
+        {
+            sqlConfigFile = ConfigYamlFile.getYamlFile(mysqlConfigFile);
+        } catch (DataIntegrityException die0)
+        {
+            LOGGER.error(die0.getMessage());
+        }
 	}
 
 	public ConquestPlugin()
