@@ -185,7 +185,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 
 
 
-    public static MySQLWrapper getBDDConnection(Map<String, String> data) throws DataIntegrityException
+    public static java.sql.Connection getBDDConnection(Map<String, String> data) throws DataIntegrityException
     {
         if(datasIntegrityChecking(data))
         {
