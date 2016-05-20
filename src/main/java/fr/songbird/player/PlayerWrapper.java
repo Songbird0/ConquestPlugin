@@ -45,6 +45,12 @@ public class PlayerWrapper
 
 
 	public PlayerWrapper(final Player player, final Nation nation)
+	/**
+     *
+	 * @param player L'instance du joueur
+	 * @param nation L'instance de la nation du joueur
+     */
+	public PlayerWrapper(final Player player, final Nation nation, int battlePoints, int honorPoints)
 	{
 		profile.put("username", player.getName());
 		profile.put("uuid", player.getUniqueId());
