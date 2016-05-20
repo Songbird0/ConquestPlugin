@@ -75,6 +75,15 @@ public class PlayerWrapper
         this.honorPoints += honorPoints;
     }
 
+    /**
+     * Soustrait des points de bataille au joueur.
+     * @param battlePoints Nombre de points de bataille à soustraire.
+     */
+    public void removeBattlePoints(final int battlePoints)
+    {
+        this.battlePoints -= battlePoints;
+    }
+
 	private void writeProfile(final JSONObject profile)
 	{
 		StringBuilder builder = new StringBuilder();
