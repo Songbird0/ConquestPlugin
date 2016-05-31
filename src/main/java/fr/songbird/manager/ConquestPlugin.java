@@ -349,7 +349,8 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	@EventHandler
     public void whenPlayerQuit(PlayerQuitEvent pqe)
     {
-        List<JSONObject> playerProfilesOccurrence = new LinkedList<>(); //On recupere toutes les occurrences du joueur si il en existe plusieurs.
+        List<JSONObject> playerProfilesOccurrence = new LinkedList<>();
+		//On recupere toutes les occurrences du joueur si il en existe plusieurs. Il ne devrait y en avoir qu'une seule normalement, mais par mesure de sécurité, on procède à un nettoyage.
         for(JSONObject jsonObject : playerProfiles)
         {
             String username = (String)jsonObject.get(pqe.getPlayer().getName());
