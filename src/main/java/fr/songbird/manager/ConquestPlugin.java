@@ -293,9 +293,6 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	    );
 
 
-		stn.setCurrentScoreboard(score);
-
-		stn.initializeScoreboard();
         LOGGER.info(new StringBuilder().append("Start in ").append(Long.toString((new Date().getTime() - start))).append("ms").toString());
 	}
 
