@@ -101,11 +101,6 @@ class ConquestPluginCore
 
 		}
 
-        regionsSet.each
-         {
-             ProtectedRegion region ->
-
-         }
         if(regionsSet.size() > 0)
         {
             ProtectedRegion currentRegion = (ProtectedRegion)regionsSet.getRegions().toArray()[0];
@@ -141,8 +136,5 @@ class ConquestPluginCore
     {
         return configFile
     }
-
-
-
 
 }
