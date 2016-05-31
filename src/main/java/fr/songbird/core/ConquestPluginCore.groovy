@@ -106,6 +106,12 @@ class ConquestPluginCore
              ProtectedRegion region ->
 
          }
+        if(regionsSet.size() > 0)
+        {
+            ProtectedRegion currentRegion = (ProtectedRegion)regionsSet.getRegions().toArray()[0];
+            assert currentRegion != null : "currentRegion ne pointe sur rien ! currentRegion=$currentRegion"
+            fireWhenZoneHasBeenReached(currentRegion.getId());
+        }
 
 	}
 
