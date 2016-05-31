@@ -7,16 +7,20 @@ import main.java.fr.songbird.groovyresources.YamlFileSkeleton
 
 /**
 *
-* Classe représentant le fichier de configuration du plugin dans la mémoire.
-*
-*
+* Classe représentant un fichier (au format yaml) de configuration quelconque dans la mémoire.
 *
 */
 class ConfigYamlFile implements ProgramConstants
 {
+    /**
+     * Structure du fichier yaml représenté en mémoire.
+     */
     private final HashMap<String, Object> yamlFile
 
-
+    /**
+     * Charge le fichier de configuration en mémoire.
+     * @param yamlFile Structure du fichier yaml représenté en mémoire.
+     */
     private ConfigYamlFile(final HashMap<String, Object> yamlFile)
     {
         this.yamlFile = yamlFile
@@ -25,14 +29,20 @@ class ConfigYamlFile implements ProgramConstants
 
     //###### DYNAMIC/INSTANCE METHODS ######
 
-
-
+    /**
+     *
+     * @return yamlFile Structure du fichier yaml représenté en mémoire.
+     */
     public def getYamlMap()
     {
         return yamlFile;
     }
 
-
+    /**
+     * Renvoie le nom du monde dans lequel se trouve le plugin.
+     * @return worldName
+     * @throws DataIntegrityException
+     */
     public String getWorldName() throws DataIntegrityException
     {
     	if(!null.equals(yamlFile.get("world")))

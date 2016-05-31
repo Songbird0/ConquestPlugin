@@ -3,7 +3,7 @@ package main.java.fr.songbird.constants;
 import java.io.File;
 
 /**
- * Constantes du projet. (Nation, et arguments de commande)
+ * Constantes du projet. (Nation, arguments de commande, chemins de fichiers de configuration)
  * @author songbird
  *
  */
