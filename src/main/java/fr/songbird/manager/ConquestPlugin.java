@@ -2,7 +2,6 @@ package main.java.fr.songbird.manager;
 
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import fr.songbird.scoreboard.StatNation;
 import main.java.fr.songbird.commbdd.MySQLWrapper;
 import main.java.fr.songbird.config.ConfigYamlFile;
 import main.java.fr.songbird.constants.ProgramConstants;
@@ -111,7 +110,6 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	/**
 	 * Scoreboard rattaché aux plugins conquete.
 	 */
-	private StatNation stn;
 
 	/**
 	* Profils des joueurs.
@@ -172,7 +170,6 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	public ConquestPlugin()
 	{
 		server = Bukkit.getServer();
-		stn = new StatNation();
 		playerProfiles = new LinkedList<>();
 		Plugin worldGuard = getServer().getPluginManager().getPlugin("WorldGuard");
 
