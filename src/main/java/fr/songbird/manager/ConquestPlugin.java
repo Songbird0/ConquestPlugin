@@ -62,7 +62,6 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
      */
 	private final ExecutorService pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
-	private final ConfigYamlFile configFile; //fichier de configuration relatif au coeur du plugin
     /**
      * Fichier de configuration relatif au coeur du plugin
      * Structure par défaut de ce fichier de configuration:
@@ -225,6 +224,28 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
             } catch (SQLException e)
             {
                 LOGGER.error("An error was occurred while establishing connection: "+e.getMessage());
+                error = true;
+                LOGGER.error("An error was occurred while establishing connection: "+sqle0.getMessage());
+            }finally
+            {
+                if(error)
+                {
+                    if(reference != null)
+                    {
+                        try
+                        {
+                            if(!reference.isClosed())
+                            {
+                                reference.close();
+                            }
+                        }catch(SQLException sqle1)
+                        {
+                            LOGGER.error(sqle1.getMessage());
+                        }
+                    }
+                    else
+                        LOGGER.warning("reference variable references nothing.");
+                }
             }
         }
         else
