@@ -63,11 +63,11 @@ class ConquestPluginCore
 		return ell.getListeners(ReachedZoneListener.class);
 	}
 
-	private synchronized def fireWhenZoneHasBeenReached()
+	private synchronized def fireWhenZoneHasBeenReached(String regionName)
 	{
 		for(ReachedZoneListener rzl : getRZL())
 		{
-			rzl.whenZoneHasBeenReached();
+			rzl.whenZoneHasBeenReached(regionName);
 		}
 	}
 
