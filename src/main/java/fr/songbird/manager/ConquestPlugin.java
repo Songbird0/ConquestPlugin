@@ -2,15 +2,12 @@ package main.java.fr.songbird.manager;
 
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
-import main.java.fr.songbird.commbdd.MySQLWrapper;
 import main.java.fr.songbird.config.ConfigYamlFile;
 import main.java.fr.songbird.constants.ProgramConstants;
 import main.java.fr.songbird.core.ConquestPluginCore;
 import main.java.fr.songbird.core.ReachedZoneListener;
 import main.java.fr.songbird.exceptions.DataIntegrityException;
-import main.java.fr.songbird.groovyresources.YamlFileSkeleton;
 import main.java.fr.songbird.nation.Nation;
-import main.java.fr.songbird.player.PlayerWrapper;
 import net.wytrem.logging.BasicLogger;
 import net.wytrem.logging.LoggerFactory;
 import org.bukkit.Bukkit;
@@ -35,6 +32,7 @@ import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
 import java.util.Map.Entry;
 import java.util.concurrent.ExecutorService;
@@ -218,12 +216,14 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
         }
         if(datasIntegrityChecking(data))
         {
+            Connection reference = null;
+            boolean error = false;
             try
             {
-                return DriverManager.getConnection(data.get("hostname"), data.get("username"), data.get("password"));
-            } catch (SQLException e)
+                reference = DriverManager.getConnection(data.get("hostname"), data.get("username"), data.get("password"));
+                return reference;
+            } catch (SQLException sqle0)
             {
-                LOGGER.error("An error was occurred while establishing connection: "+e.getMessage());
                 error = true;
                 LOGGER.error("An error was occurred while establishing connection: "+sqle0.getMessage());
             }finally
@@ -339,7 +339,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	@EventHandler
 	public void whenPlayerJoin(PlayerJoinEvent pje)
 	{
-		pje.getPlayer().setScoreboard(stn.getCurrentScoreboard());
+		//pje.getPlayer().setScoreboard(stn.getCurrentScoreboard());
 
 	}
 
@@ -359,14 +359,25 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
                 }
             }
         }
+        try
+        {
+            sqlConnection = ConquestPlugin.getBDDConnection((Map)sqlConfigFile.getYamlMap());
+            Statement userStatement = sqlConnection.createStatement();
+
+        }catch(DataIntegrityException die1)
+        {
+            LOGGER.error(die1.getMessage());
+        }catch(SQLException sqle2)
+        {
+            LOGGER.error(sqle2.getMessage());
+        }
         playerProfiles.removeAll(playerProfilesOccurrence); //On libere la memoire
     }
 
 	@Override
-	public void whenZoneHasBeenReached()
 	public void whenZoneHasBeenReached(String regionName)
 	{
-
+		//TODO Afficher le nom de la region sur le scoreboard du joueur
 	}
 
 	public final LinkedList<JSONObject> getPlayerProfilesList()
