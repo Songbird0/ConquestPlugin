@@ -364,6 +364,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 
 	@Override
 	public void whenZoneHasBeenReached()
+	public void whenZoneHasBeenReached(String regionName)
 	{
 
 	}
