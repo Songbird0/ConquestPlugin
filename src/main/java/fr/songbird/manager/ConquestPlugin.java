@@ -50,11 +50,43 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 {
 
 
+    /**
+     * Référence de l'objet encapsulant la connexion.
+     */
 	private Connection sqlConnection;
+    /**
+     * Pointeur vers l'instance du serveur Spigot.
+     */
 	private final Server server;
+    /**
+     * Pool de fils d'exécution extensible selon les moyens de la machine sur laquelle il est initialisé.
+     */
 	private final ExecutorService pool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
 	private final ConfigYamlFile configFile; //fichier de configuration relatif au coeur du plugin
+    /**
+     * Fichier de configuration relatif au coeur du plugin
+     * Structure par défaut de ce fichier de configuration:
+     * <pre>
+     * world: {hisName: your world name}
+     * regions:
+     *   theirName: {nomRegion: NomScoreboard}
+     * devise: {points de bataille: 1, points d'honneur: 1}
+     * </pre>
+     */
+	private final ConfigYamlFile configFile;
+    /**
+     * Fichier de configuration encapsulant les données nécessaires à une connexion vers la base de données.
+     * Structure par défaut de ce fichier de configuration:
+     * <pre>
+     *     {
+     *       hostname: null,
+     *       port: null,
+     *       username: null,
+     *       password: null
+     *     }
+     * </pre>
+     */
     private ConfigYamlFile sqlConfigFile;
 
 	/**
