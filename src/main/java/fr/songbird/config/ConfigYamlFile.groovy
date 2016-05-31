@@ -124,6 +124,36 @@ class ConfigYamlFile implements ProgramConstants
         )
 
         new YamlFileSkeleton(mysqlConfigFile, "mysql.skeleton")
+        new YamlFileSkeleton
+        (
+                scoreboardConfigFile,
+                "generic.skeleton",
+                [
+                        "MyAwesomeObjective":
+                                [
+                                        "title":"MyAwesomeObjective",
+                                        "color":"blue",
+                                        "criteria":"dummy",
+                                        "ObjectiveScores":
+                                                [
+                                                        [
+                                                                "name":"myAwesomeScore",
+                                                                "value":0,
+                                                                "color":"aqua"
+                                                        ],
+                                                        [
+                                                                "name":"AnotherScore",
+                                                                "value":1,
+                                                                "color":"red"
+                                                        ]
+
+                                                ]
+                                ],
+                        "rotation":false
+
+                ]
+        )
+
     }
 
     public static boolean checkConfigFile()
