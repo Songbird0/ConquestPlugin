@@ -67,6 +67,8 @@ public class PlayerWrapper
 	public void addBattlePoints(final int battlePoints)
     {
         this.battlePoints += battlePoints;
+		profile.put("point de bataille", this.battlePoints);
+        addHonorPoints(battlePoints * devise.getCoeff());
     }
 
     /**
