@@ -72,6 +72,14 @@ public class PlayerWrapper
     }
 
     /**
+     * Renvoie les points de bataille du joueur.
+     */
+    public int getBattlePoints()
+    {
+        return battlePoints;
+    }
+
+    /**
      * Ajoute des points d'honneur au joueur.
      * @param honorPoints Nombre de points d'honneur à ajouter.
      */
