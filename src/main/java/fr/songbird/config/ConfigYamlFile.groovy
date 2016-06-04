@@ -134,25 +134,27 @@ class ConfigYamlFile implements ProgramConstants
                 scoreboardConfigFile,
                 "generic.skeleton",
                 [
-                        "MyAwesomeObjective":
+                        "Objectives":
                                 [
-                                        "title":"MyAwesomeObjective",
-                                        "color":"blue",
-                                        "criteria":"dummy",
-                                        "ObjectiveScores":
-                                                [
-                                                        [
-                                                                "name":"myAwesomeScore",
-                                                                "value":0,
-                                                                "color":"aqua"
-                                                        ],
-                                                        [
-                                                                "name":"AnotherScore",
-                                                                "value":1,
-                                                                "color":"red"
-                                                        ]
+                                    [
+                                            "title":"MyAwesomeObjective",
+                                            "color":"blue",
+                                            "criteria":"dummy",
+                                            "ObjectiveScores":
+                                                    [
+                                                            [
+                                                                    "name":"myAwesomeScore",
+                                                                    "value":0,
+                                                                    "color":"aqua"
+                                                            ],
+                                                            [
+                                                                    "name":"AnotherScore",
+                                                                    "value":1,
+                                                                    "color":"red"
+                                                            ]
 
-                                                ]
+                                                    ]
+                                    ]
                                 ],
                         "rotation":false
 
