@@ -80,11 +80,9 @@ class ConquestPluginCore
 	}
 
 
+
 	public synchronized def run()
 	{
-		def x = userLocation.getX();
-		def y = userLocation.getY();
-		def z = userLocation.getZ();
 
 		def regionsSet = WGBukkit.getRegionManager(configFile.getWorldName()).getApplicableRegions(userLocation)
 		def nameRegionsSet = configFile.getNameRegionsSet()
