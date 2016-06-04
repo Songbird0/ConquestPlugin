@@ -115,8 +115,6 @@ class ConfigYamlFile implements ProgramConstants
                                 "nomRegion2":"NomScoreboard2"
                             ],
                 "devise" : [
-
-                            "points de bataille":1,
                             "points d'honneur":1
 
                            ]
