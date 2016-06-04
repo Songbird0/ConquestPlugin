@@ -14,6 +14,9 @@ import java.util.Set;
  */
 public class Devise implements ProgramConstants
 {
+    /**
+     * Multiplicateur de points de bataille
+     */
     private final int ptsCoeff;
 
     public Devise()
