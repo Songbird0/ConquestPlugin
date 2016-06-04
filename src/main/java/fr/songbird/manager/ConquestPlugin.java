@@ -8,17 +8,16 @@ import main.java.fr.songbird.core.ConquestPluginCore;
 import main.java.fr.songbird.core.ReachedZoneListener;
 import main.java.fr.songbird.exceptions.DataIntegrityException;
 import main.java.fr.songbird.nation.Nation;
+import main.java.fr.songbird.player.PlayerWrapper;
 import net.wytrem.logging.BasicLogger;
 import net.wytrem.logging.LoggerFactory;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
-import org.bukkit.entity.Animals;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Monster;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -111,7 +110,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	/**
 	* Profils des joueurs.
 	*/
-	private LinkedList<JSONObject> playerProfiles;
+	private LinkedList<PlayerWrapper> playerProfiles;
 	/**
 	 * Parser du fichier de configuration.
 	 */
@@ -201,6 +200,35 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 		}
 		return true;
 	}
+
+    private void killTracer(EntityDeathEvent ede)
+    {
+        LivingEntity entity = ede.getEntity();
+        Entity killer = entity.getKiller();
+        if(entity instanceof Monster || entity instanceof Animals)
+        {
+            if(killer instanceof org.bukkit.entity.Player)
+            {
+                for(PlayerWrapper player : getPlayerProfilesList())
+                {
+                    if(player.getPlayerProfile().get("username").equals(killer.getName()))
+                    {
+                        player.addBattlePoints(1);
+                    }
+                }
+            }
+        }
+        else if(entity instanceof org.bukkit.entity.Player)
+        {
+            for(PlayerWrapper player : getPlayerProfilesList())
+            {
+                if(player.getPlayerProfile().get("username").equals(killer.getName()))
+                {
+                    player.addBattlePoints(3);
+                }
+            }
+        }
+    }
 
 
 
@@ -321,19 +349,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	@EventHandler
     public void whenEntityIsDead(org.bukkit.event.entity.EntityDeathEvent ede)
     {
-        LivingEntity entity = ede.getEntity();
-        Entity killer = entity.getKiller();
-        if(entity instanceof Monster || entity instanceof Animals)
-        {
-            if(killer instanceof org.bukkit.entity.Player)
-            {
-                killer = (org.bukkit.entity.Player)killer;
-            }
-        }
-        else if(entity instanceof org.bukkit.entity.Player)
-        {
-
-        }
+        killTracer(ede);
     }
 
 	@EventHandler
@@ -346,16 +362,16 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	@EventHandler
     public void whenPlayerQuit(PlayerQuitEvent pqe)
     {
-        List<JSONObject> playerProfilesOccurrence = new LinkedList<>();
+        List<PlayerWrapper> playerProfilesOccurrence = new LinkedList<>();
 		//On recupere toutes les occurrences du joueur si il en existe plusieurs. Il ne devrait y en avoir qu'une seule normalement, mais par mesure de sécurité, on procède à un nettoyage.
-        for(JSONObject jsonObject : playerProfiles)
+        for(PlayerWrapper playerWrapper: playerProfiles)
         {
-            String username = (String)jsonObject.get(pqe.getPlayer().getName());
+            String username = (String)playerWrapper.getPlayerProfile().get(pqe.getPlayer().getName());
             if(username != null)
             {
                 if(username.equals(pqe.getPlayer().getName()))
                 {
-                    playerProfilesOccurrence.add(jsonObject);
+                    playerProfilesOccurrence.add(playerWrapper);
                 }
             }
         }
@@ -380,7 +396,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 		//TODO Afficher le nom de la region sur le scoreboard du joueur
 	}
 
-	public final LinkedList<JSONObject> getPlayerProfilesList()
+	public final LinkedList<PlayerWrapper> getPlayerProfilesList()
 	{
 		return this.playerProfiles;
 	}
