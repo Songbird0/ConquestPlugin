@@ -80,10 +80,6 @@ class ConquestPluginCore
 	}
 
 
-	/*
-	* Va vérifier à chaque appel si le joueur se trouve dans les limites d'une zone.
-	*
-	*/
 	public synchronized def run()
 	{
 		def x = userLocation.getX();
