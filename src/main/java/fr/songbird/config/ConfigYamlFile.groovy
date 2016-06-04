@@ -116,8 +116,15 @@ class ConfigYamlFile implements ProgramConstants
                             ],
                 "devise" : [
                             "points d'honneur":1
-
-                           ]
+                           ],
+                "villages":
+                        [
+                                "monday":"villageName",
+                                "tuesday":"villageName",
+                                "wednesday":"villageName",
+                                "thursday":"villageName",
+                                "friday":"villageName"
+                        ]
             ]
         )
 
