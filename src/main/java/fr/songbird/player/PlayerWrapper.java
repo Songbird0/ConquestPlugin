@@ -2,6 +2,7 @@ package main.java.fr.songbird.player;
 
 import main.java.fr.songbird.manager.ConquestPlugin;
 import main.java.fr.songbird.nation.Nation;
+import main.java.fr.songbird.points.Devise;
 import org.bukkit.entity.Player;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -24,6 +25,7 @@ public class PlayerWrapper
 	private JSONObject profile;
 	private int battlePoints;
     private int honorPoints;
+    private final Devise devise = new Devise();
 	private static File bddPath;
 
 	{
