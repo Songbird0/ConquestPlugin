@@ -1,5 +1,8 @@
 package main.java.fr.songbird.cron;
 
+import net.wytrem.logging.BasicLogger;
+import net.wytrem.logging.LoggerFactory;
+
 /**
  * One Xelor for govern the Time.
  * <br><br>
@@ -14,7 +17,7 @@ public class Nox
      * For example:<br>
      * Begin at 13h. (1pm)
      */
-    ScrapTime timeBeginning = null;
+    private ScrapTime timeBeginning = null;
 
     /**
      * Time offset between the beginning and the end.<br>
@@ -23,7 +26,7 @@ public class Nox
      * Finish at: 18h. (6pm)<br>
      * Offset = 18 - 13 = 5 hours.
      */
-    ScrapTime offset = null;
+    private ScrapTime offset = null;
 
     /**
      * Schedule of time that represents the ending.<br>
@@ -32,7 +35,9 @@ public class Nox
      * Offset = 5 hours.<br>
      * Finish at: 13 + 5 = 18h. (6pm)<br>
      */
-    ScrapTime timeEnding = null;
+    protected ScrapTime timeEnding = null;
+
+    private final BasicLogger LOGGER = LoggerFactory.getLogger(Nox.class);
 
     /**
      * Initializes timeBeginning value.<br>
@@ -40,7 +45,7 @@ public class Nox
      * @param minutes (optionnal) You could initialize the timeBeginning value with seconds parameter only.
      * @param hours (optionnal) You could initialize the timeBeginning value with seconds or minutes parameter only.
      */
-    public Nox(final int seconds, final int minutes, final int hours) throws Exception
+    protected Nox(final int seconds, final int minutes, final int hours) throws Exception
     {
         if(!(seconds >= 0)
              && !(minutes >= 0)
@@ -68,10 +73,16 @@ public class Nox
      * @param minutes Minutes offset time
      * @param hours Hours offset time
      */
-    public final void setOffset(final int seconds, final int minutes, final int hours)
+    public final void setOffset(final int seconds, final int minutes, final int hours) throws Exception
     {
         this.offset = new ScrapTime(seconds, minutes, hours);
-        this.timeEnding = new ScrapTime(offset.getSum() + timeBeginning.getSum());
+        final int result = offset.getSum() + timeBeginning.getSum();
+        LOGGER.info(Integer.toString(result));
+        this.timeEnding = new ScrapTime(result, 0, 0);
+        LOGGER.info("offset: "+offset.getSum());
+        LOGGER.info("timeBeginning: "+timeBeginning.getSum());
+        LOGGER.info("timeEnding: "+timeEnding.getSum());
+        LOGGER.info(offset.getSum()+"+"+timeBeginning.getSum()+"="+result);
     }
 
     /**
@@ -80,7 +91,7 @@ public class Nox
      * @param minutes Minutes offset time
      * @see {@link Nox#setOffset(int, int, int)}
      */
-    public final void setOffset(final int seconds, final int minutes)
+    public final void setOffset(final int seconds, final int minutes) throws Exception
     {
         setOffset(seconds, minutes, 0);
     }
@@ -91,7 +102,7 @@ public class Nox
      * @see {@link Nox#setOffset(int, int)}
      * @see {@link Nox#setOffset(int, int, int)}
      */
-    public final void setOffset(final int seconds)
+    public final void setOffset(final int seconds) throws Exception
     {
         setOffset(seconds, 0, 0);
     }

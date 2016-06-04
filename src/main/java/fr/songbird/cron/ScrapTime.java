@@ -1,5 +1,7 @@
 package main.java.fr.songbird.cron;
 
+
+
 /**
  * Represents a time schedule. (a scrap time)
  * @author Songbird
@@ -32,7 +34,7 @@ public class ScrapTime
      * @param minutes (optionnal) May be used for write the time in seconds and minutes only. (or minutes only)
      * @param hours (optionnal) May be used for write the time with the three variables.
      */
-    public ScrapTime(final int seconds, final int minutes, final int hours)
+    public ScrapTime(final int seconds, final int minutes, final int hours) throws Exception
     {
         if(seconds >= 0
                 && minutes >= 0
@@ -42,16 +44,21 @@ public class ScrapTime
             this.seconds = seconds;
             this.minutes = minutes;
             this.hours = hours;
-            sum = seconds + (minutes*60 + hours*3600);
+            this.sum = seconds + (minutes*60 + hours*3600);
+        }
+        else
+        {
+            throw new Exception("Error, one of parameters are negative");
         }
     }
 
-    public ScrapTime(final int seconds, final int minutes)
+    public ScrapTime(final int seconds, final int minutes) throws Exception
     {
         new ScrapTime(seconds, minutes, 0);
     }
 
-    public ScrapTime(final int seconds)
+
+    public ScrapTime(final int seconds) throws Exception
     {
         new ScrapTime(seconds, 0, 0);
     }
@@ -102,6 +109,6 @@ public class ScrapTime
      */
     public final int getSum()
     {
-        return sum;
+        return this.sum;
     }
 }
