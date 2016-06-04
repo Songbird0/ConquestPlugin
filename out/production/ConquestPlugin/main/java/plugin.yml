@@ -1,9 +1,9 @@
 name: ConquestPlugin
-version: 0.0.13_4-ALPHA
+version: 0.16.131_15-alpha
 description: Conquest system of Dynastium
 author: Songbird
 website: https://github.com/Songbird0
-main: fr.songbird.manager.ConquestPlugin
+main: main.java.fr.songbird.manager.ConquestPlugin
 prefix: CONQUESTPLUG
 softdepend: [WorldGuard]
 commands:
