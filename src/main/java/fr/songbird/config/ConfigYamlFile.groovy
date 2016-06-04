@@ -112,11 +112,13 @@ class ConfigYamlFile implements ProgramConstants
                             "generic.skeleton",
                             [
                                     "world":"your world name",
-                                    "regions" : [
+                                    "regions" :
+                                    [
                                             "nomRegion1":"NomScoreboard1",
                                             "nomRegion2":"NomScoreboard2"
                                     ],
-                                    "devise" : [
+                                    "devise" :
+                                    [
                                             "points d'honneur":1
                                     ],
                                     "villages":
