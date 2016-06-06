@@ -18,7 +18,7 @@ import org.bukkit.scoreboard.Scoreboard;
 public class ScoreboardWrapper implements ProgramConstants
 {
     /**
-     * Reférence vers l'instance du scoreboard
+     * Reférence vers l'instance d'un nouveau scoreboard
      */
     private final Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
 
@@ -42,6 +42,37 @@ public class ScoreboardWrapper implements ProgramConstants
     public ScoreboardWrapper()
     {
 
+    }
+
+    /**
+     * Example:<br>
+     * <code>
+     *     new ScoreboardWrapper().formatMe(2.5); // => 2:30:0 (2 hours:30 minutes:0 seconds
+     * </code>
+     * @param hour Can be a Double|Integer object
+     * @return formatted hour
+     * @throws Exception
+     */
+    public String formatMe(Number hour) throws Exception, AssertionError
+    {
+        assert (hour instanceof Double || hour instanceof Integer) : "Must be Double|Integer instance. hour="+hour;
+        if((double)hour > 0.0)
+        {
+            int base = (int)hour * 3600;
+            int base_minute = base/60;
+            int seconds = base%60;
+            int hours = base_minute/60;
+            int minutes = base_minute%60;
+
+            return Integer.toString(hours) + ":" + Integer.toString(minutes) + ":" + Integer.toString(seconds);
+        }
+
+        throw new Exception("hour =< 0");
+    }
+
+    public Scoreboard getCurrentScoreboard()
+    {
+        return scoreboard;
     }
 
 }
