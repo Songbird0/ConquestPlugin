@@ -63,7 +63,7 @@ class ConquestPluginCore
 		return ell.getListeners(ReachedZoneListener.class);
 	}
 
-	private synchronized def fireWhenZoneHasBeenReached(String regionName)
+	private def fireWhenZoneHasBeenReached(String regionName)
 	{
 		for(ReachedZoneListener rzl : getRZL())
 		{
@@ -80,15 +80,9 @@ class ConquestPluginCore
 	}
 
 
-	/*
-	* Va vérifier à chaque appel si le joueur se trouve dans les limites d'une zone.
-	*
-	*/
+
 	public synchronized def run()
 	{
-		def x = userLocation.getX();
-		def y = userLocation.getY();
-		def z = userLocation.getZ();
 
 		def regionsSet = WGBukkit.getRegionManager(configFile.getWorldName()).getApplicableRegions(userLocation)
 		def nameRegionsSet = configFile.getNameRegionsSet()
