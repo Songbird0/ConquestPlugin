@@ -69,7 +69,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
      * devise: {points de bataille: 1, points d'honneur: 1}
      * </pre>
      */
-	private final ConfigYamlFile configFile;
+	private ConfigYamlFile configFile;
     /**
      * Fichier de configuration encapsulant les données nécessaires à une connexion vers la base de données.
      * Structure par défaut de ce fichier de configuration:
@@ -95,13 +95,13 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	* </p>
 	*
 	*/
-	private final File filePath;
+	private File filePath;
 
 	/**
 	* Référence vers une instance du coeur du plugin.
 	*
 	*/
-	private final ConquestPluginCore core;
+	private ConquestPluginCore core;
 
 	/**
 	 * Scoreboard rattaché aux plugins conquete.
@@ -136,31 +136,7 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 	}
 
 	{
-		CONFIGFILEPATH.mkdirs();
-		filePath = new File(new StringBuffer()
-			.append(CONFIGFILEPATH.toString())
-			.append(File.separator)
-			.append("config.yml").toString()
-			);
-		if(!filePath.exists())
-		{
-			try
-			{
-				filePath.createNewFile();
-			}catch(IOException ioe0)
-			{
-				LOGGER.error(ioe0.getMessage());
-			}
-		}
-		core = new ConquestPluginCore(filePath);
-		configFile = (ConfigYamlFile)core.getConfigFile();
-        try
-        {
-            sqlConfigFile = ConfigYamlFile.getYamlFile(mysqlConfigFile);
-        } catch (DataIntegrityException die0)
-        {
-            LOGGER.error(die0.getMessage());
-        }
+		generationChecking();
 	}
 
 	public ConquestPlugin()
@@ -200,6 +176,37 @@ public class ConquestPlugin extends JavaPlugin implements Listener, ProgramConst
 		}
 		return true;
 	}
+
+
+
+    private void generationChecking()
+    {
+        CONFIGFILEPATH.mkdirs();
+        filePath = new File(new StringBuffer()
+                .append(CONFIGFILEPATH.toString())
+                .append(File.separator)
+                .append("config.yml").toString()
+        );
+        if(!filePath.exists())
+        {
+            try
+            {
+                filePath.createNewFile();
+            }catch(IOException ioe0)
+            {
+                LOGGER.error(ioe0.getMessage());
+            }
+        }
+        core = new ConquestPluginCore(filePath);
+        configFile = (ConfigYamlFile)core.getConfigFile();
+        try
+        {
+            sqlConfigFile = ConfigYamlFile.getYamlFile(mysqlConfigFile);
+        } catch (DataIntegrityException die0)
+        {
+            LOGGER.error(die0.getMessage());
+        }
+    }
 
     private void killTracer(EntityDeathEvent ede)
     {
