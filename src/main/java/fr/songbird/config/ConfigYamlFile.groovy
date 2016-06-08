@@ -56,28 +56,6 @@ class ConfigYamlFile implements ProgramConstants
     }
 
 
-    public def get(racine)
-    {
-        assert racine in String || racine in Integer: "Le parametre n'est pas une chaine de caracteres."
-        def value = null;
-        assert  (value = yamlFile.get(racine)).getClass() in [String.class, Integer.class, Map.class]: "La clé est introuvable."
-        return value in String ?
-                (String)value : value in Integer ?
-                (Integer)value : value in Map ?
-                (Map)value : null
-    }
-
-    public def get(racine, children)
-    {
-        assert (racine.class in [String.class, Integer.class]) && (children.class in [String.class, Integer.class]) : "les parametres ne sont pas de type String ou Integer"
-        def racineValue = get(racine)
-        assert racineValue in Map : "Surchage de la methode inutile, ne comporte pas de fils."
-        def childrenValue = racineValue.get(children)
-        assert childrenValue != null : "childrenValue is $childrenValue"
-        return childrenValue
-
-    }
-
 
     //###### STATIC METHODS ######
 
