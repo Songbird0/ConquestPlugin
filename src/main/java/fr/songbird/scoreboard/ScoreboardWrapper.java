@@ -1,3 +1,78 @@
+package main.java.fr.songbird.scoreboard;
+
+import main.java.fr.songbird.config.ConfigYamlFile;
+import main.java.fr.songbird.constants.ProgramConstants;
+import main.java.fr.songbird.exceptions.DataIntegrityException;
+import net.wytrem.logging.BasicLogger;
+import net.wytrem.logging.LoggerFactory;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Timer;
+
+/**
+ * Created by songbird on 30/05/16.<br>
+ * Encapsule les fonctionnalités du scoreboard pour y enregistrer divers objectifs et effectuer des opérations<br>
+ * non couvertes par les outils de spigot.
+ *
+ * @author Songbird
+ */
+public class ScoreboardWrapper implements ProgramConstants
+{
+
+    private TimerKeyword tk = null;
+    private LocationKeyword lk = null;
+
+    /**
+     * Reférence vers l'instance d'un nouveau scoreboard
+     */
+    private final Scoreboard scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
+
+    /**
+     * Logger dédié à la classe.
+     */
+    private static final BasicLogger LOGGER = LoggerFactory.getLogger(ScoreboardWrapper.class);
+
+    private ConfigYamlFile scoreboardConfig;
+    private String colorPrefix;
+
+    public ScoreboardWrapper()
+    {
+
+        loadScoreboardConfigFile();
+        initializeKeywords();
+        HashMap<String, Object> yamlMap = (HashMap<String, Object)scoreboardConfig.getYamlMap();
+        Object objectivesList = yamlMap.get("Objectives");
+        assert (objectivesList != null) : "objectives list doesn't exist.";
+        assert (objectivesList instanceof List) : "objectivesList variable are not instance of List";
+        for(Object objectives : (List)objectivesList)
+        {
+            assert(objectives instanceof Map) : "objectives variable are not instance of Map";
+            Map map = (Map)objectives;
+            Objective objective = scoreboard.registerNewObjective(getAdequateColor((String)map.get("color"))+(String)map.get("title"), (String)map.get("criteria"));
+            Object objectiveScoresList = map.get("ObjectiveScores");
+            assert objectiveScoresList != null : "objectiveScoresList="+objectiveScoresList;
+            assert objectiveScoresList instanceof List : "objectiveScoresList="+objectiveScoresList.getClass();
+            List list = (List)objectiveScoresList;
+            for(Object scoreProperties : list)
+            {
+                assert scoreProperties instanceof Map : "scoreProperties="+scoreProperties;
+                Map scorePropertiesMap = (Map)scoreProperties;
+                String name = (String)scorePropertiesMap.get("name");
+                String nameColored = getAdequateColor((String)scorePropertiesMap.get("color")) + name;
+                String value = (String)scorePropertiesMap.get("value");
+                int index = (int)scorePropertiesMap.get("index");
+
+                objective.getScore(nameColored + value).setScore(index);
+            }
+        }
+    }
+
     private ChatColor getAdequateColor(String word)
     {
         String wordUC = word.toUpperCase();
