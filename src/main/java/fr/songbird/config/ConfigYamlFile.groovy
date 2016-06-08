@@ -82,81 +82,96 @@ class ConfigYamlFile implements ProgramConstants
     {
         if(!checkConfigFile())
         {
-            CONFIGFILEPATH.mkdirs();
-
-            new YamlFileSkeleton
-                    (
-                            genericConfigFile,
-                            "generic.skeleton",
-                            [
-                                    "world":"your world name",
-                                    "regions" :
-                                    [
-                                            "nomRegion1":"NomScoreboard1",
-                                            "nomRegion2":"NomScoreboard2"
-                                    ],
-                                    "devise" :
-                                    [
-                                            "points d'honneur":1
-                                    ],
-                                    "villages":
-                                            [
-                                                    "monday":"villageName",
-                                                    "tuesday":"villageName",
-                                                    "wednesday":"villageName",
-                                                    "thursday":"villageName",
-                                                    "friday":"villageName"
-                                            ]
-                            ]
-                    )
-
-            new YamlFileSkeleton(mysqlConfigFile, "mysql.skeleton")
-            new YamlFileSkeleton
-                    (
-                            scoreboardConfigFile,
-                            "generic.skeleton",
-                            [
-                                    "Objectives":
-                                            [
-                                                    [
-                                                            "title":"MyAwesomeObjective",
-                                                            "color":"blue",
-                                                            "criteria":"dummy",
-                                                            "ObjectiveScores":
-                                                                    [
-                                                                            [
-                                                                                    "name":"myAwesomeScore",
-                                                                                    "value":0,
-                                                                                    "color":"aqua"
-                                                                            ],
-                                                                            [
-                                                                                    "name":"AnotherScore",
-                                                                                    "value":1,
-                                                                                    "color":"red"
-                                                                            ]
-
-                                                                    ]
-                                                    ],
-                                                    [
-                                                            "title":"anotherObjective",
-                                                            "color":"multicolor",
-                                                            "criteria":"dummy",
-                                                            "ObjectivesScores":
-                                                                    [
-                                                                            [
-                                                                                    "name":"scoreName",
-                                                                                    "value":0,
-                                                                                    "color":"purple"
-                                                                            ]
-                                                                    ]
-                                                    ]
-                                            ],
-                                    "rotation":false
-
-                            ]
-                    )
+            CONFIGFILEPATH.mkdirs()
+            generateMainConfigFile()
+            generateMySQLConfigFile()
+            generateScoreboardConfigFile()
         }
 
+    }
+
+    private static generateScoreboardConfigFile()
+    {
+        new YamlFileSkeleton
+                (
+                        scoreboardConfigFile,
+                        "generic.skeleton",
+                        [
+                                "Objectives":
+                                        [
+                                                [
+                                                        "title"          : "MyAwesomeObjective",
+                                                        "color"          : "blue",
+                                                        "criteria"       : "dummy",
+                                                        "ObjectiveScores":
+                                                                [
+                                                                        [
+                                                                                "name" : "myAwesomeScore",
+                                                                                "index": 0,
+                                                                                "value":"whatever",
+                                                                                "color": "aqua"
+                                                                        ],
+                                                                        [
+                                                                                "name" : "AnotherScore",
+                                                                                "index": 1,
+                                                                                "value":"whatever",
+                                                                                "color": "red"
+                                                                        ]
+
+                                                                ]
+                                                ],
+                                                [
+                                                        "title"           : "anotherObjective",
+                                                        "color"           : "multicolor",
+                                                        "criteria"        : "dummy",
+                                                        "ObjectivesScores":
+                                                                [
+                                                                        [
+                                                                                "name" : "scoreName",
+                                                                                "value": 0,
+                                                                                "color": "purple"
+                                                                        ]
+                                                                ]
+                                                ]
+                                        ],
+                                "rotation"  : false
+
+                        ]
+                )
+    }
+
+    private static generateMySQLConfigFile()
+    {
+        new YamlFileSkeleton(mysqlConfigFile, "mysql.skeleton")
+    }
+
+    private static generateMainConfigFile()
+    {
+        new YamlFileSkeleton
+                (
+                        genericConfigFile,
+                        "generic.skeleton",
+                        [
+                                "world"   : "your world name",
+                                "regions" :
+                                        [
+                                                "nomRegion1": "NomScoreboard1",
+                                                "nomRegion2": "NomScoreboard2"
+                                        ],
+                                "devise"  :
+                                        [
+                                                "points d'honneur": 1
+                                        ],
+                                "villages":
+                                        [
+                                                "monday"   : "villageName",
+                                                "tuesday"  : "villageName",
+                                                "wednesday": "villageName",
+                                                "thursday" : "villageName",
+                                                "friday"   : "villageName"
+                                        ]
+                        ]
+                )
     }
 
     public static boolean checkConfigFile()
@@ -168,10 +183,5 @@ class ConfigYamlFile implements ProgramConstants
             return true;
         }
         return false;
-    }
-
-    public static void main(String... strings)
-    {
-        setBasicConfigFileArchetype();
     }
 }
