@@ -49,7 +49,7 @@ class ConquestPluginCore
 
 		try
 		{
-			configFile = ConfigYamlFile.getYamlFile(yamlFile)
+			configFile = (ConfigYamlFile)ConfigYamlFile.getYamlFile(yamlFile)
 		}
 		catch(DataIntegrityException die0)
 		{
