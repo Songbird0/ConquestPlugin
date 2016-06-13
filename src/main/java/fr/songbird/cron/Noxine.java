@@ -2,6 +2,7 @@ package main.java.fr.songbird.cron;
 
 import javax.swing.event.EventListenerList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  * Created by songbird on 01/06/16.
@@ -11,7 +12,6 @@ import java.util.Calendar;
 public class Noxine extends Nox
 {
     private EventListenerList listenersList = new EventListenerList();
-    private boolean timeHasBeenReached = false;
 
     public Noxine(final int seconds, final int minutes, final int hours) throws Exception
     {
@@ -32,10 +32,10 @@ public class Noxine extends Nox
 
     public final void computeTimeLeft()
     {
-       final int scrapTimeResult = new ScrapTime(Calendar.SECOND, Calendar.MINUTE, Calendar.HOUR).getSum();
+        Calendar c = new GregorianCalendar();
+       final int scrapTimeResult = new ScrapTime(c.get(Calendar.SECOND), c.get(Calendar.MINUTE), c.get(Calendar.HOUR)).getSum();
        if(scrapTimeResult >= timeEnding.getSum())
        {
-           timeHasBeenReached = true;
            fireWhenOffsetHasBeenReached();
        }
     }
