@@ -1,9 +1,11 @@
 package main.java.fr.songbird.scoreboard;
 
+import org.bukkit.scoreboard.Score;
+
 /**
  * Created by songbird on 07/06/16.
  */
-public class TimerKeyword extends ScoreboardKeyword
+public class TimerKeyword extends ScoreboardKeyword implements Listener
 {
 
 
@@ -17,5 +19,17 @@ public class TimerKeyword extends ScoreboardKeyword
         {
             throw new Exception("keyword parameter does equals "+$TIMER+", not '"+keyword+"'.");
         }
+    }
+
+
+    public void addTimerListener(Score score)
+    {
+
+    }
+
+    @Override
+    public void listenTo(Listened listened)
+    {
+
     }
 }
