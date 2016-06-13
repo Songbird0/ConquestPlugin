@@ -8,6 +8,7 @@ import net.wytrem.logging.LoggerFactory;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Score;
 import org.bukkit.scoreboard.Scoreboard;
 
 import java.util.HashMap;
@@ -41,12 +42,20 @@ public class ScoreboardWrapper implements ProgramConstants
     private ConfigYamlFile scoreboardConfig;
     private String colorPrefix;
 
+
     public ScoreboardWrapper()
     {
 
         loadScoreboardConfigFile();
         initializeKeywords();
-        HashMap<String, Object> yamlMap = (HashMap<String, Object)scoreboardConfig.getYamlMap();
+        objectivesGeneration();
+    }
+
+    private void objectivesGeneration()
+    {
+        Object sas = scoreboardConfig.getYamlMap();
+        assert sas instanceof HashMap;
+        HashMap<String, Object> yamlMap = (HashMap<String, Object>)sas;
         Object objectivesList = yamlMap.get("Objectives");
         assert (objectivesList != null) : "objectives list doesn't exist.";
         assert (objectivesList instanceof List) : "objectivesList variable are not instance of List";
@@ -56,7 +65,7 @@ public class ScoreboardWrapper implements ProgramConstants
             Map map = (Map)objectives;
             Objective objective = scoreboard.registerNewObjective(getAdequateColor((String)map.get("color"))+(String)map.get("title"), (String)map.get("criteria"));
             Object objectiveScoresList = map.get("ObjectiveScores");
-            assert objectiveScoresList != null : "objectiveScoresList="+objectiveScoresList;
+            assert objectiveScoresList != null : "objectiveScoresList="+objectiveScoresList.toString();
             assert objectiveScoresList instanceof List : "objectiveScoresList="+objectiveScoresList.getClass();
             List list = (List)objectiveScoresList;
             for(Object scoreProperties : list)
@@ -64,11 +73,16 @@ public class ScoreboardWrapper implements ProgramConstants
                 assert scoreProperties instanceof Map : "scoreProperties="+scoreProperties;
                 Map scorePropertiesMap = (Map)scoreProperties;
                 String name = (String)scorePropertiesMap.get("name");
-                String nameColored = getAdequateColor((String)scorePropertiesMap.get("color")) + name;
+                String coloredName = getAdequateColor((String)scorePropertiesMap.get("color")) + name;
                 String value = (String)scorePropertiesMap.get("value");
                 int index = (int)scorePropertiesMap.get("index");
 
-                objective.getScore(nameColored + value).setScore(index);
+                Score score = objective.getScore(coloredName + value);
+
+                if(tk.getPattern().matcher(value).matches())
+                {
+                     tk.addTimerListener(score);
+                }
             }
         }
     }
