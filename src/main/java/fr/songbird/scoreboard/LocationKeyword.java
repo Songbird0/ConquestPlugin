@@ -6,7 +6,7 @@ package main.java.fr.songbird.scoreboard;
 public class LocationKeyword extends ScoreboardKeyword
 {
 
-    public static final String $LOCATION = "location";
+    private static final String $LOCATION = "location";
 
     public LocationKeyword(String keyword) throws Exception
     {
